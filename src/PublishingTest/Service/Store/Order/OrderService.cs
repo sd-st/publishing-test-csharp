@@ -2,7 +2,6 @@ using System;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using PublishingTest.Models;
 using PublishingTest.Models.Store.Order;
 
 namespace PublishingTest.Service.Store.Order;
@@ -16,7 +15,7 @@ public sealed class OrderService : IOrderService
         _client = client;
     }
 
-    public async Task<Order> Create(OrderCreateParams @params)
+    public async Task<OrderCreateResponse> Create(OrderCreateParams @params)
     {
         using HttpRequestMessage webRequest = new(HttpMethod.Post, @params.Url(this._client))
         {
@@ -33,13 +32,13 @@ public sealed class OrderService : IOrderService
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
         }
-        return JsonSerializer.Deserialize<Order>(
+        return JsonSerializer.Deserialize<OrderCreateResponse>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
                 ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
     }
 
-    public async Task<Order> Retrieve(OrderRetrieveParams @params)
+    public async Task<OrderRetrieveResponse> Retrieve(OrderRetrieveParams @params)
     {
         using HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
         @params.AddHeadersToRequest(webRequest, this._client);
@@ -53,7 +52,7 @@ public sealed class OrderService : IOrderService
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
         }
-        return JsonSerializer.Deserialize<Order>(
+        return JsonSerializer.Deserialize<OrderRetrieveResponse>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
                 ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();

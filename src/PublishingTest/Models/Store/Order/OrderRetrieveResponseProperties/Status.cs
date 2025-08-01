@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace PublishingTest.Models.OrderProperties;
+namespace PublishingTest.Models.Store.Order.OrderRetrieveResponseProperties;
 
 /// <summary>
 /// Order Status

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using OrderProperties = PublishingTest.Models.OrderProperties;
+using OrderRetrieveResponseProperties = PublishingTest.Models.Store.Order.OrderRetrieveResponseProperties;
 
-namespace PublishingTest.Models;
+namespace PublishingTest.Models.Store.Order;
 
-[JsonConverter(typeof(ModelConverter<Order>))]
-public sealed record class Order : ModelBase, IFromRaw<Order>
+[JsonConverter(typeof(ModelConverter<OrderRetrieveResponse>))]
+public sealed record class OrderRetrieveResponse : ModelBase, IFromRaw<OrderRetrieveResponse>
 {
     public long? ID
     {
@@ -73,14 +73,14 @@ public sealed record class Order : ModelBase, IFromRaw<Order>
     /// <summary>
     /// Order Status
     /// </summary>
-    public OrderProperties::Status? Status
+    public OrderRetrieveResponseProperties::Status? Status
     {
         get
         {
             if (!this.Properties.TryGetValue("status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<OrderProperties::Status?>(
+            return JsonSerializer.Deserialize<OrderRetrieveResponseProperties::Status?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -98,17 +98,17 @@ public sealed record class Order : ModelBase, IFromRaw<Order>
         this.Status?.Validate();
     }
 
-    public Order() { }
+    public OrderRetrieveResponse() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Order(Dictionary<string, JsonElement> properties)
+    OrderRetrieveResponse(Dictionary<string, JsonElement> properties)
     {
         Properties = properties;
     }
 #pragma warning restore CS8618
 
-    public static Order FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static OrderRetrieveResponse FromRawUnchecked(Dictionary<string, JsonElement> properties)
     {
         return new(properties);
     }
