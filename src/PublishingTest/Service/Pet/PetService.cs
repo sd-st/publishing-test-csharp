@@ -39,6 +39,26 @@ public sealed class PetService : IPetService
             ) ?? throw new NullReferenceException();
     }
 
+    public async Task<Pet> Retrieve(PetRetrieveParams @params)
+    {
+        using HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
+        @params.AddHeadersToRequest(webRequest, this._client);
+        using HttpResponseMessage response = await _client
+            .HttpClient.SendAsync(webRequest)
+            .ConfigureAwait(false);
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new HttpException(
+                response.StatusCode,
+                await response.Content.ReadAsStringAsync().ConfigureAwait(false)
+            );
+        }
+        return JsonSerializer.Deserialize<Pet>(
+                await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
+                ModelBase.SerializerOptions
+            ) ?? throw new NullReferenceException();
+    }
+
     public async Task<Pet> Update(PetUpdateParams @params)
     {
         using HttpRequestMessage webRequest = new(HttpMethod.Put, @params.Url(this._client))
@@ -62,6 +82,42 @@ public sealed class PetService : IPetService
             ) ?? throw new NullReferenceException();
     }
 
+    public async Task Delete(PetDeleteParams @params)
+    {
+        using HttpRequestMessage webRequest = new(HttpMethod.Delete, @params.Url(this._client));
+        @params.AddHeadersToRequest(webRequest, this._client);
+        using HttpResponseMessage response = await _client
+            .HttpClient.SendAsync(webRequest)
+            .ConfigureAwait(false);
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new HttpException(
+                response.StatusCode,
+                await response.Content.ReadAsStringAsync().ConfigureAwait(false)
+            );
+        }
+    }
+
+    public async Task<List<Pet>> FindByStatus(PetFindByStatusParams @params)
+    {
+        using HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
+        @params.AddHeadersToRequest(webRequest, this._client);
+        using HttpResponseMessage response = await _client
+            .HttpClient.SendAsync(webRequest)
+            .ConfigureAwait(false);
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new HttpException(
+                response.StatusCode,
+                await response.Content.ReadAsStringAsync().ConfigureAwait(false)
+            );
+        }
+        return JsonSerializer.Deserialize<List<Pet>>(
+                await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
+                ModelBase.SerializerOptions
+            ) ?? throw new NullReferenceException();
+    }
+
     public async Task<List<Pet>> FindByTags(PetFindByTagsParams @params)
     {
         using HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
@@ -80,6 +136,22 @@ public sealed class PetService : IPetService
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
                 ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
+    }
+
+    public async Task UpdateByID(PetUpdateByIDParams @params)
+    {
+        using HttpRequestMessage webRequest = new(HttpMethod.Post, @params.Url(this._client));
+        @params.AddHeadersToRequest(webRequest, this._client);
+        using HttpResponseMessage response = await _client
+            .HttpClient.SendAsync(webRequest)
+            .ConfigureAwait(false);
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new HttpException(
+                response.StatusCode,
+                await response.Content.ReadAsStringAsync().ConfigureAwait(false)
+            );
+        }
     }
 
     public async Task<PetUploadImageResponse> UploadImage(PetUploadImageParams @params)
