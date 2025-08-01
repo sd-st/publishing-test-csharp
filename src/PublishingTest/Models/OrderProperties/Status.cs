@@ -1,35 +1,35 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace PublishingTest.Models.Pet.PetFindByStatusParamsProperties;
+namespace PublishingTest.Models.OrderProperties;
 
 /// <summary>
-/// Status values that need to be considered for filter
+/// Order Status
 /// </summary>
 [JsonConverter(typeof(EnumConverter<Status, string>))]
 public sealed record class Status(string value) : IEnum<Status, string>
 {
-    public static readonly Status Available = new("available");
+    public static readonly Status Placed = new("placed");
 
-    public static readonly Status Pending = new("pending");
+    public static readonly Status Approved = new("approved");
 
-    public static readonly Status Sold = new("sold");
+    public static readonly Status Delivered = new("delivered");
 
     readonly string _value = value;
 
     public enum Value
     {
-        Available,
-        Pending,
-        Sold,
+        Placed,
+        Approved,
+        Delivered,
     }
 
     public Value Known() =>
         _value switch
         {
-            "available" => Value.Available,
-            "pending" => Value.Pending,
-            "sold" => Value.Sold,
+            "placed" => Value.Placed,
+            "approved" => Value.Approved,
+            "delivered" => Value.Delivered,
             _ => throw new ArgumentOutOfRangeException(nameof(_value)),
         };
 

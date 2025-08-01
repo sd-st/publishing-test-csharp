@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using PublishingTest.Models;
 using PublishingTest.Models.Store.Order;
 
 namespace PublishingTest.Service.Store.Order;
@@ -8,13 +9,13 @@ public interface IOrderService
     /// <summary>
     /// Place a new order in the store
     /// </summary>
-    Task<OrderCreateResponse> Create(OrderCreateParams @params);
+    Task<Order> Create(OrderCreateParams @params);
 
     /// <summary>
     /// For valid response try integer IDs with value <= 5 or > 10. Other values will
     /// generate exceptions.
     /// </summary>
-    Task<OrderRetrieveResponse> Retrieve(OrderRetrieveParams @params);
+    Task<Order> Retrieve(OrderRetrieveParams @params);
 
     /// <summary>
     /// For valid response try integer IDs with value < 1000. Anything above 1000 or

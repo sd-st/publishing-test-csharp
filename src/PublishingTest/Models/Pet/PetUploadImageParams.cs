@@ -1,54 +1,68 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 
 namespace PublishingTest.Models.Pet;
 
 /// <summary>
-/// Updates a pet in the store with form data
+/// uploads an image
 /// </summary>
-public sealed record class PetUpdateByIDParams : ParamsBase
+public sealed record class PetUploadImageParams : ParamsBase
 {
+    public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
+
     public required long PetID;
 
     /// <summary>
-    /// Name of pet that needs to be updated
+    /// Additional Metadata
     /// </summary>
-    public string? Name
+    public string? AdditionalMetadata
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("name", out JsonElement element))
+            if (!this.QueryProperties.TryGetValue("additionalMetadata", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.QueryProperties["name"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.QueryProperties["additionalMetadata"] = JsonSerializer.SerializeToElement(value);
+        }
     }
 
-    /// <summary>
-    /// Status of pet that needs to be updated
-    /// </summary>
-    public string? Status
+    public string? Image
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("status", out JsonElement element))
+            if (!this.BodyProperties.TryGetValue("image", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.QueryProperties["status"] = JsonSerializer.SerializeToElement(value); }
+        set { this.BodyProperties["image"] = JsonSerializer.SerializeToElement(value); }
     }
 
     public override Uri Url(IPublishingTestClient client)
     {
         return new UriBuilder(
-            client.BaseUrl.ToString().TrimEnd('/') + string.Format("/pets/{0}", this.PetID)
+            client.BaseUrl.ToString().TrimEnd('/')
+                + string.Format("/pet/{0}/uploadImage", this.PetID)
         )
         {
             Query = this.QueryString(client),
         }.Uri;
+    }
+
+    public StringContent BodyContent()
+    {
+        return new(
+            JsonSerializer.Serialize(this.BodyProperties),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     public void AddHeadersToRequest(HttpRequestMessage request, IPublishingTestClient client)

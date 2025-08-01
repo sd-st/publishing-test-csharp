@@ -1,35 +1,35 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace PublishingTest.Models.Store.Order.OrderRetrieveResponseProperties;
+namespace PublishingTest.Models.Pet.PetUpdateParamsProperties;
 
 /// <summary>
-/// Order Status
+/// pet status in the store
 /// </summary>
 [JsonConverter(typeof(EnumConverter<Status, string>))]
 public sealed record class Status(string value) : IEnum<Status, string>
 {
-    public static readonly Status Placed = new("placed");
+    public static readonly Status Available = new("available");
 
-    public static readonly Status Approved = new("approved");
+    public static readonly Status Pending = new("pending");
 
-    public static readonly Status Delivered = new("delivered");
+    public static readonly Status Sold = new("sold");
 
     readonly string _value = value;
 
     public enum Value
     {
-        Placed,
-        Approved,
-        Delivered,
+        Available,
+        Pending,
+        Sold,
     }
 
     public Value Known() =>
         _value switch
         {
-            "placed" => Value.Placed,
-            "approved" => Value.Approved,
-            "delivered" => Value.Delivered,
+            "available" => Value.Available,
+            "pending" => Value.Pending,
+            "sold" => Value.Sold,
             _ => throw new ArgumentOutOfRangeException(nameof(_value)),
         };
 

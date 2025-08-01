@@ -7,22 +7,23 @@ namespace PublishingTest.Service.Pet;
 public interface IPetService
 {
     /// <summary>
-    /// Returns a single pet
+    /// Add a new pet to the store
     /// </summary>
-    Task<Pet> Retrieve(PetRetrieveParams @params);
+    Task<Pet> Create(PetCreateParams @params);
 
     /// <summary>
-    /// delete a pet
+    /// Update an existing pet by Id
     /// </summary>
-    Task Delete(PetDeleteParams @params);
+    Task<Pet> Update(PetUpdateParams @params);
 
     /// <summary>
-    /// Multiple status values can be provided with comma separated strings
+    /// Multiple tags can be provided with comma separated strings. Use tag1, tag2,
+    /// tag3 for testing.
     /// </summary>
-    Task<List<Pet>> FindByStatus(PetFindByStatusParams @params);
+    Task<List<Pet>> FindByTags(PetFindByTagsParams @params);
 
     /// <summary>
-    /// Updates a pet in the store with form data
+    /// uploads an image
     /// </summary>
-    Task UpdateByID(PetUpdateByIDParams @params);
+    Task<PetUploadImageResponse> UploadImage(PetUploadImageParams @params);
 }

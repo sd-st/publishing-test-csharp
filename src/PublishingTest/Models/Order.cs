@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using OrderRetrieveResponseProperties = PublishingTest.Models.Store.Order.OrderRetrieveResponseProperties;
+using OrderProperties = PublishingTest.Models.OrderProperties;
 
-namespace PublishingTest.Models.Store.Order;
+namespace PublishingTest.Models;
 
-[JsonConverter(typeof(ModelConverter<OrderRetrieveResponse>))]
-public sealed record class OrderRetrieveResponse : ModelBase, IFromRaw<OrderRetrieveResponse>
+[JsonConverter(typeof(ModelConverter<Order>))]
+public sealed record class Order : ModelBase, IFromRaw<Order>
 {
     public long? ID
     {
@@ -73,14 +73,14 @@ public sealed record class OrderRetrieveResponse : ModelBase, IFromRaw<OrderRetr
     /// <summary>
     /// Order Status
     /// </summary>
-    public OrderRetrieveResponseProperties::Status? Status
+    public OrderProperties::Status? Status
     {
         get
         {
             if (!this.Properties.TryGetValue("status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<OrderRetrieveResponseProperties::Status?>(
+            return JsonSerializer.Deserialize<OrderProperties::Status?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -98,17 +98,17 @@ public sealed record class OrderRetrieveResponse : ModelBase, IFromRaw<OrderRetr
         this.Status?.Validate();
     }
 
-    public OrderRetrieveResponse() { }
+    public Order() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    OrderRetrieveResponse(Dictionary<string, JsonElement> properties)
+    Order(Dictionary<string, JsonElement> properties)
     {
         Properties = properties;
     }
 #pragma warning restore CS8618
 
-    public static OrderRetrieveResponse FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static Order FromRawUnchecked(Dictionary<string, JsonElement> properties)
     {
         return new(properties);
     }
