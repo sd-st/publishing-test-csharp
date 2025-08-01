@@ -15,7 +15,7 @@ public sealed record class PetUploadImageResponse : ModelBase, IFromRaw<PetUploa
             if (!this.Properties.TryGetValue("code", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<int?>(element);
         }
         set { this.Properties["code"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -27,7 +27,7 @@ public sealed record class PetUploadImageResponse : ModelBase, IFromRaw<PetUploa
             if (!this.Properties.TryGetValue("message", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.Properties["message"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -39,7 +39,7 @@ public sealed record class PetUploadImageResponse : ModelBase, IFromRaw<PetUploa
             if (!this.Properties.TryGetValue("type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.Properties["type"] = JsonSerializer.SerializeToElement(value); }
     }

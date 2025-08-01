@@ -22,7 +22,7 @@ public sealed record class UserUpdateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("id", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<long?>(element);
         }
         set { this.BodyProperties["id"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -34,7 +34,7 @@ public sealed record class UserUpdateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("email", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.BodyProperties["email"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -46,7 +46,7 @@ public sealed record class UserUpdateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("firstName", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.BodyProperties["firstName"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -58,7 +58,7 @@ public sealed record class UserUpdateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("lastName", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.BodyProperties["lastName"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -70,7 +70,7 @@ public sealed record class UserUpdateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("password", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.BodyProperties["password"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -82,7 +82,7 @@ public sealed record class UserUpdateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("phone", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.BodyProperties["phone"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -94,7 +94,7 @@ public sealed record class UserUpdateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("username", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.BodyProperties["username"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -109,7 +109,7 @@ public sealed record class UserUpdateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("userStatus", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<int?>(element);
         }
         set { this.BodyProperties["userStatus"] = JsonSerializer.SerializeToElement(value); }
     }

@@ -17,7 +17,7 @@ public sealed record class Order : ModelBase, IFromRaw<Order>
             if (!this.Properties.TryGetValue("id", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<long?>(element);
         }
         set { this.Properties["id"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -29,7 +29,7 @@ public sealed record class Order : ModelBase, IFromRaw<Order>
             if (!this.Properties.TryGetValue("complete", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<bool?>(element);
         }
         set { this.Properties["complete"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -41,7 +41,7 @@ public sealed record class Order : ModelBase, IFromRaw<Order>
             if (!this.Properties.TryGetValue("petId", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<long?>(element);
         }
         set { this.Properties["petId"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -53,7 +53,7 @@ public sealed record class Order : ModelBase, IFromRaw<Order>
             if (!this.Properties.TryGetValue("quantity", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<int?>(element);
         }
         set { this.Properties["quantity"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -65,7 +65,7 @@ public sealed record class Order : ModelBase, IFromRaw<Order>
             if (!this.Properties.TryGetValue("shipDate", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTime?>(element);
         }
         set { this.Properties["shipDate"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -80,10 +80,7 @@ public sealed record class Order : ModelBase, IFromRaw<Order>
             if (!this.Properties.TryGetValue("status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<OrderProperties::Status?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<OrderProperties::Status?>(element);
         }
         set { this.Properties["status"] = JsonSerializer.SerializeToElement(value); }
     }

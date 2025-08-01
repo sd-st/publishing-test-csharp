@@ -19,7 +19,7 @@ public sealed record class UserLoginParams : ParamsBase
             if (!this.QueryProperties.TryGetValue("password", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.QueryProperties["password"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -34,7 +34,7 @@ public sealed record class UserLoginParams : ParamsBase
             if (!this.QueryProperties.TryGetValue("username", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.QueryProperties["username"] = JsonSerializer.SerializeToElement(value); }
     }

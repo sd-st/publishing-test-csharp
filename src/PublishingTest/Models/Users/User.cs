@@ -15,7 +15,7 @@ public sealed record class User : ModelBase, IFromRaw<User>
             if (!this.Properties.TryGetValue("id", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<long?>(element);
         }
         set { this.Properties["id"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -27,7 +27,7 @@ public sealed record class User : ModelBase, IFromRaw<User>
             if (!this.Properties.TryGetValue("email", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.Properties["email"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -39,7 +39,7 @@ public sealed record class User : ModelBase, IFromRaw<User>
             if (!this.Properties.TryGetValue("firstName", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.Properties["firstName"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -51,7 +51,7 @@ public sealed record class User : ModelBase, IFromRaw<User>
             if (!this.Properties.TryGetValue("lastName", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.Properties["lastName"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -63,7 +63,7 @@ public sealed record class User : ModelBase, IFromRaw<User>
             if (!this.Properties.TryGetValue("password", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.Properties["password"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -75,7 +75,7 @@ public sealed record class User : ModelBase, IFromRaw<User>
             if (!this.Properties.TryGetValue("phone", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.Properties["phone"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -87,7 +87,7 @@ public sealed record class User : ModelBase, IFromRaw<User>
             if (!this.Properties.TryGetValue("username", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.Properties["username"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -102,7 +102,7 @@ public sealed record class User : ModelBase, IFromRaw<User>
             if (!this.Properties.TryGetValue("userStatus", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<int?>(element);
         }
         set { this.Properties["userStatus"] = JsonSerializer.SerializeToElement(value); }
     }

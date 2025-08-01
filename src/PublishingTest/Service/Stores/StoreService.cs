@@ -26,21 +26,19 @@ public sealed class StoreService : IStoreService
 
     public async Task<Dictionary<string, int>> ListInventory(StoreListInventoryParams @params)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
+        HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
         @params.AddHeadersToRequest(webRequest, this._client);
-        using HttpResponseMessage response = await _client
-            .HttpClient.SendAsync(webRequest)
-            .ConfigureAwait(false);
-        if (!response.IsSuccessStatusCode)
+        using HttpResponseMessage response = await _client.HttpClient.SendAsync(webRequest);
+        try
         {
-            throw new HttpException(
-                response.StatusCode,
-                await response.Content.ReadAsStringAsync().ConfigureAwait(false)
-            );
+            response.EnsureSuccessStatusCode();
+        }
+        catch (HttpRequestException e)
+        {
+            throw new HttpException(e.StatusCode, await response.Content.ReadAsStringAsync());
         }
         return JsonSerializer.Deserialize<Dictionary<string, int>>(
-                await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
+                await response.Content.ReadAsStringAsync()
             ) ?? throw new NullReferenceException();
     }
 }

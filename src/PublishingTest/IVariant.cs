@@ -1,8 +1,8 @@
 namespace PublishingTest;
 
-public interface IVariant<TVariant, TValue>
-    where TVariant : IVariant<TVariant, TValue>
+public interface IVariant<IV, T>
+    where IV : IVariant<IV, T>
 {
-    static abstract TVariant From(TValue value);
-    TValue Value { get; }
+    static abstract IV From(T value);
+    T Value { get; }
 }

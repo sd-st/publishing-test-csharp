@@ -20,7 +20,7 @@ public sealed record class UserCreateWithListParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("items", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<List<User>?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<List<User>?>(element);
         }
         set { this.BodyProperties["items"] = JsonSerializer.SerializeToElement(value); }
     }

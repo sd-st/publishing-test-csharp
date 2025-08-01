@@ -25,7 +25,7 @@ public sealed record class PetUploadImageParams : ParamsBase
             if (!this.QueryProperties.TryGetValue("additionalMetadata", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set
         {
@@ -40,7 +40,7 @@ public sealed record class PetUploadImageParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("image", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.BodyProperties["image"] = JsonSerializer.SerializeToElement(value); }
     }

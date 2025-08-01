@@ -7,9 +7,7 @@ public abstract record class ModelBase
 {
     public Dictionary<string, JsonElement> Properties { get; set; } = [];
 
-    internal static readonly JsonSerializerOptions SerializerOptions = new();
-
-    static readonly JsonSerializerOptions _toStringSerializerOptions = new(SerializerOptions)
+    static readonly JsonSerializerOptions _toStringSerializerOptions = new()
     {
         WriteIndented = true,
     };

@@ -1,8 +1,8 @@
 namespace PublishingTest;
 
-public interface IEnum<TEnum, TValue>
-    where TEnum : IEnum<TEnum, TValue>
+public interface IEnum<IE, T>
+    where IE : IEnum<IE, T>
 {
-    static abstract TEnum FromRaw(TValue value);
-    TValue Raw();
+    static abstract IE FromRaw(T value);
+    T Raw();
 }

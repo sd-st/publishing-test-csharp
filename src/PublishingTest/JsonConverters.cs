@@ -7,10 +7,10 @@ using System.Text.Json.Serialization;
 
 namespace PublishingTest;
 
-public sealed class ModelConverter<TModel> : JsonConverter<TModel>
-    where TModel : ModelBase, IFromRaw<TModel>
+public sealed class ModelConverter<MB> : JsonConverter<MB>
+    where MB : ModelBase, IFromRaw<MB>
 {
-    public override TModel? Read(
+    public override MB? Read(
         ref Utf8JsonReader reader,
         Type _typeToConvert,
         JsonSerializerOptions options
@@ -22,28 +22,28 @@ public sealed class ModelConverter<TModel> : JsonConverter<TModel>
         if (properties == null)
             return null;
 
-        return TModel.FromRawUnchecked(properties);
+        return MB.FromRawUnchecked(properties);
     }
 
-    public override void Write(Utf8JsonWriter writer, TModel value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, MB value, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(writer, value.Properties, options);
     }
 }
 
-public sealed class EnumConverter<TEnum, TValue> : JsonConverter<TEnum>
-    where TEnum : IEnum<TEnum, TValue>
+public sealed class EnumConverter<IE, T> : JsonConverter<IE>
+    where IE : IEnum<IE, T>
 {
-    public override TEnum Read(
+    public override IE Read(
         ref Utf8JsonReader reader,
         Type _typeToConvert,
         JsonSerializerOptions options
     )
     {
-        return TEnum.FromRaw(JsonSerializer.Deserialize<TValue>(ref reader, options)!);
+        return IE.FromRaw(JsonSerializer.Deserialize<T>(ref reader, options)!);
     }
 
-    public override void Write(Utf8JsonWriter writer, TEnum value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, IE value, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(writer, value.Raw(), options);
     }
@@ -89,19 +89,19 @@ public sealed class UnionConverter<T> : JsonConverter<T>
     }
 }
 
-public sealed class VariantConverter<TVariant, TValue> : JsonConverter<TVariant>
-    where TVariant : IVariant<TVariant, TValue>
+public sealed class VariantConverter<IV, T> : JsonConverter<IV>
+    where IV : IVariant<IV, T>
 {
-    public override TVariant Read(
+    public override IV Read(
         ref Utf8JsonReader reader,
         Type _typeToConvert,
         JsonSerializerOptions options
     )
     {
-        return TVariant.From(JsonSerializer.Deserialize<TValue>(ref reader, options)!);
+        return IV.From(JsonSerializer.Deserialize<T>(ref reader, options)!);
     }
 
-    public override void Write(Utf8JsonWriter writer, TVariant value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, IV value, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(writer, value.Value, options);
     }

@@ -15,7 +15,7 @@ public sealed record class Tag : ModelBase, IFromRaw<Tag>
             if (!this.Properties.TryGetValue("id", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<long?>(element);
         }
         set { this.Properties["id"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -27,7 +27,7 @@ public sealed record class Tag : ModelBase, IFromRaw<Tag>
             if (!this.Properties.TryGetValue("name", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.Properties["name"] = JsonSerializer.SerializeToElement(value); }
     }

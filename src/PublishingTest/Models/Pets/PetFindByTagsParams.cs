@@ -21,7 +21,7 @@ public sealed record class PetFindByTagsParams : ParamsBase
             if (!this.QueryProperties.TryGetValue("tags", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<List<string>?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<List<string>?>(element);
         }
         set { this.QueryProperties["tags"] = JsonSerializer.SerializeToElement(value); }
     }

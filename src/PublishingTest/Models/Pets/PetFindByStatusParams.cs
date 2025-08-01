@@ -20,10 +20,7 @@ public sealed record class PetFindByStatusParams : ParamsBase
             if (!this.QueryProperties.TryGetValue("status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<PetFindByStatusParamsProperties::Status?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<PetFindByStatusParamsProperties::Status?>(element);
         }
         set { this.QueryProperties["status"] = JsonSerializer.SerializeToElement(value); }
     }

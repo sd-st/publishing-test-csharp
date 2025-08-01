@@ -17,7 +17,7 @@ public sealed record class Pet : ModelBase, IFromRaw<Pet>
             if (!this.Properties.TryGetValue("name", out JsonElement element))
                 throw new ArgumentOutOfRangeException("name", "Missing required argument");
 
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<string>(element)
                 ?? throw new ArgumentNullException("name");
         }
         set { this.Properties["name"] = JsonSerializer.SerializeToElement(value); }
@@ -30,7 +30,7 @@ public sealed record class Pet : ModelBase, IFromRaw<Pet>
             if (!this.Properties.TryGetValue("photoUrls", out JsonElement element))
                 throw new ArgumentOutOfRangeException("photoUrls", "Missing required argument");
 
-            return JsonSerializer.Deserialize<List<string>>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<List<string>>(element)
                 ?? throw new ArgumentNullException("photoUrls");
         }
         set { this.Properties["photoUrls"] = JsonSerializer.SerializeToElement(value); }
@@ -43,7 +43,7 @@ public sealed record class Pet : ModelBase, IFromRaw<Pet>
             if (!this.Properties.TryGetValue("id", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<long?>(element);
         }
         set { this.Properties["id"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -55,7 +55,7 @@ public sealed record class Pet : ModelBase, IFromRaw<Pet>
             if (!this.Properties.TryGetValue("category", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Category?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<Category?>(element);
         }
         set { this.Properties["category"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -70,10 +70,7 @@ public sealed record class Pet : ModelBase, IFromRaw<Pet>
             if (!this.Properties.TryGetValue("status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<PetProperties::Status?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<PetProperties::Status?>(element);
         }
         set { this.Properties["status"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -85,10 +82,7 @@ public sealed record class Pet : ModelBase, IFromRaw<Pet>
             if (!this.Properties.TryGetValue("tags", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<List<PetProperties::Tag>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<List<PetProperties::Tag>?>(element);
         }
         set { this.Properties["tags"] = JsonSerializer.SerializeToElement(value); }
     }

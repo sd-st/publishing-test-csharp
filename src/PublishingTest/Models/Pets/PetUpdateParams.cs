@@ -21,7 +21,7 @@ public sealed record class PetUpdateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("name", out JsonElement element))
                 throw new ArgumentOutOfRangeException("name", "Missing required argument");
 
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<string>(element)
                 ?? throw new ArgumentNullException("name");
         }
         set { this.BodyProperties["name"] = JsonSerializer.SerializeToElement(value); }
@@ -34,7 +34,7 @@ public sealed record class PetUpdateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("photoUrls", out JsonElement element))
                 throw new ArgumentOutOfRangeException("photoUrls", "Missing required argument");
 
-            return JsonSerializer.Deserialize<List<string>>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<List<string>>(element)
                 ?? throw new ArgumentNullException("photoUrls");
         }
         set { this.BodyProperties["photoUrls"] = JsonSerializer.SerializeToElement(value); }
@@ -47,7 +47,7 @@ public sealed record class PetUpdateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("id", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<long?>(element);
         }
         set { this.BodyProperties["id"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -59,7 +59,7 @@ public sealed record class PetUpdateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("category", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Category?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<Category?>(element);
         }
         set { this.BodyProperties["category"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -74,10 +74,7 @@ public sealed record class PetUpdateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<PetUpdateParamsProperties::Status?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<PetUpdateParamsProperties::Status?>(element);
         }
         set { this.BodyProperties["status"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -89,10 +86,7 @@ public sealed record class PetUpdateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("tags", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<List<PetUpdateParamsProperties::Tag>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<List<PetUpdateParamsProperties::Tag>?>(element);
         }
         set { this.BodyProperties["tags"] = JsonSerializer.SerializeToElement(value); }
     }

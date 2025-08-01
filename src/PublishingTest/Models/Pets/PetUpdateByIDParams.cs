@@ -21,7 +21,7 @@ public sealed record class PetUpdateByIDParams : ParamsBase
             if (!this.QueryProperties.TryGetValue("name", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.QueryProperties["name"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -36,7 +36,7 @@ public sealed record class PetUpdateByIDParams : ParamsBase
             if (!this.QueryProperties.TryGetValue("status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(element);
         }
         set { this.QueryProperties["status"] = JsonSerializer.SerializeToElement(value); }
     }
