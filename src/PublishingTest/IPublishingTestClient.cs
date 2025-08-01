@@ -1,6 +1,8 @@
 using System;
 using Http = System.Net.Http;
-using Store = PublishingTest.Service.Store;
+using Pets = PublishingTest.Service.Pets;
+using Stores = PublishingTest.Service.Stores;
+using Users = PublishingTest.Service.Users;
 
 namespace PublishingTest;
 
@@ -12,9 +14,9 @@ public interface IPublishingTestClient
 
     string APIKey { get; init; }
 
-    global::PublishingTest.Service.Pet.IPetService Pet { get; }
+    Pets::IPetService Pets { get; }
 
-    Store::IStoreService Store { get; }
+    Stores::IStoreService Stores { get; }
 
-    global::PublishingTest.Service.User.IUserService User { get; }
+    Users::IUserService Users { get; }
 }

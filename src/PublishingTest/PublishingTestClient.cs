@@ -1,6 +1,8 @@
 using System;
 using Http = System.Net.Http;
-using Store = PublishingTest.Service.Store;
+using Pets = PublishingTest.Service.Pets;
+using Stores = PublishingTest.Service.Stores;
+using Users = PublishingTest.Service.Users;
 
 namespace PublishingTest;
 
@@ -30,28 +32,28 @@ public sealed class PublishingTestClient : IPublishingTestClient
         init { _apiKey = new(() => value); }
     }
 
-    readonly Lazy<global::PublishingTest.Service.Pet.IPetService> _pet;
-    public global::PublishingTest.Service.Pet.IPetService Pet
+    readonly Lazy<Pets::IPetService> _pets;
+    public Pets::IPetService Pets
     {
-        get { return _pet.Value; }
+        get { return _pets.Value; }
     }
 
-    readonly Lazy<Store::IStoreService> _store;
-    public Store::IStoreService Store
+    readonly Lazy<Stores::IStoreService> _stores;
+    public Stores::IStoreService Stores
     {
-        get { return _store.Value; }
+        get { return _stores.Value; }
     }
 
-    readonly Lazy<global::PublishingTest.Service.User.IUserService> _user;
-    public global::PublishingTest.Service.User.IUserService User
+    readonly Lazy<Users::IUserService> _users;
+    public Users::IUserService Users
     {
-        get { return _user.Value; }
+        get { return _users.Value; }
     }
 
     public PublishingTestClient()
     {
-        _pet = new(() => new global::PublishingTest.Service.Pet.PetService(this));
-        _store = new(() => new Store::StoreService(this));
-        _user = new(() => new global::PublishingTest.Service.User.UserService(this));
+        _pets = new(() => new Pets::PetService(this));
+        _stores = new(() => new Stores::StoreService(this));
+        _users = new(() => new Users::UserService(this));
     }
 }
