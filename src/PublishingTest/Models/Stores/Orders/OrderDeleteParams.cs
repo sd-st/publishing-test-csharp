@@ -1,13 +1,13 @@
 using System;
 using System.Net.Http;
 
-namespace PublishingTest.Models.Stores.Order;
+namespace PublishingTest.Models.Stores.Orders;
 
 /// <summary>
-/// For valid response try integer IDs with value <= 5 or > 10. Other values will
-/// generate exceptions.
+/// For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers
+/// will generate API errors
 /// </summary>
-public sealed record class OrderRetrieveParams : ParamsBase
+public sealed record class OrderDeleteParams : ParamsBase
 {
     public required long OrderID;
 

@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PublishingTest.Models.Stores;
-using Order = PublishingTest.Service.Stores.Order;
+using Orders = PublishingTest.Service.Stores.Orders;
 
 namespace PublishingTest.Service.Stores;
 
 public interface IStoreService
 {
-    Order::IOrderService Order { get; }
+    Orders::IOrderService Orders { get; }
 
     /// <summary>
     /// Returns a map of status codes to quantities

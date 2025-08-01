@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using PublishingTest.Models.Stores;
-using Order = PublishingTest.Service.Stores.Order;
+using Orders = PublishingTest.Service.Stores.Orders;
 
 namespace PublishingTest.Service.Stores;
 
@@ -15,13 +15,13 @@ public sealed class StoreService : IStoreService
     public StoreService(IPublishingTestClient client)
     {
         _client = client;
-        _order = new(() => new Order::OrderService(client));
+        _orders = new(() => new Orders::OrderService(client));
     }
 
-    readonly Lazy<Order::IOrderService> _order;
-    public Order::IOrderService Order
+    readonly Lazy<Orders::IOrderService> _orders;
+    public Orders::IOrderService Orders
     {
-        get { return _order.Value; }
+        get { return _orders.Value; }
     }
 
     public async Task<Dictionary<string, int>> ListInventory(StoreListInventoryParams @params)

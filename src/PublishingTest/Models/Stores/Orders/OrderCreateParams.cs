@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
-using OrderCreateParamsProperties = PublishingTest.Models.Stores.Order.OrderCreateParamsProperties;
+using OrderCreateParamsProperties = PublishingTest.Models.Stores.Orders.OrderCreateParamsProperties;
 
-namespace PublishingTest.Models.Stores.Order;
+namespace PublishingTest.Models.Stores.Orders;
 
 /// <summary>
 /// Place a new order in the store

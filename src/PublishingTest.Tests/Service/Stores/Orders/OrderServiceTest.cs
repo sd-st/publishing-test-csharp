@@ -1,15 +1,15 @@
 using System;
 using System.Threading.Tasks;
-using PublishingTest.Models.Stores.Order.OrderCreateParamsProperties;
+using PublishingTest.Models.Stores.Orders.OrderCreateParamsProperties;
 
-namespace PublishingTest.Tests.Service.Stores.Order;
+namespace PublishingTest.Tests.Service.Stores.Orders;
 
 public class OrderServiceTest : TestBase
 {
     [Fact]
     public async Task Create_Works()
     {
-        var order = await this.client.Stores.Order.Create(
+        var order = await this.client.Stores.Orders.Create(
             new()
             {
                 ID = 10,
@@ -26,13 +26,13 @@ public class OrderServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var order = await this.client.Stores.Order.Retrieve(new() { OrderID = 0 });
+        var order = await this.client.Stores.Orders.Retrieve(new() { OrderID = 0 });
         order.Validate();
     }
 
     [Fact]
     public async Task Delete_Works()
     {
-        await this.client.Stores.Order.Delete(new() { OrderID = 0 });
+        await this.client.Stores.Orders.Delete(new() { OrderID = 0 });
     }
 }

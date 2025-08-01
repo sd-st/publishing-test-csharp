@@ -3,9 +3,9 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using PublishingTest.Models;
-using PublishingTest.Models.Stores.Order;
+using PublishingTest.Models.Stores.Orders;
 
-namespace PublishingTest.Service.Stores.Order;
+namespace PublishingTest.Service.Stores.Orders;
 
 public sealed class OrderService : IOrderService
 {

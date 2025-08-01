@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace PublishingTest.Models.Stores.Order.OrderCreateParamsProperties;
+namespace PublishingTest.Models.Stores.Orders.OrderCreateParamsProperties;
 
 /// <summary>
 /// Order Status

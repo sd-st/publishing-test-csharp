@@ -25,7 +25,7 @@ See the [`examples`](examples) directory for complete and runnable examples.
 
 ```C#
 using PublishingTest;
-using PublishingTest.Models.Stores.Order;
+using PublishingTest.Models.Stores.Orders;
 using System;
 
 // Configured using the PETSTORE_API_KEY and PUBLISHING_TEST_BASE_URL environment variables
@@ -36,7 +36,7 @@ OrderCreateParams param = new()
 
 };
 
-var order = await client.Stores.Order.Create(param);
+var order = await client.Stores.Orders.Create(param);
 
 Console.WriteLine(order);
 ```
