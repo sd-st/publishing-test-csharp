@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace PublishingTest.Tests.Service.Stores;
+namespace PublishingTest.Tests.Services.Stores;
 
 public class StoreServiceTest : TestBase
 {

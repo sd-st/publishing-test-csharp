@@ -4,9 +4,9 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using PublishingTest.Models.Stores;
-using Orders = PublishingTest.Service.Stores.Orders;
+using Orders = PublishingTest.Services.Stores.Orders;
 
-namespace PublishingTest.Service.Stores;
+namespace PublishingTest.Services.Stores;
 
 public sealed class StoreService : IStoreService
 {

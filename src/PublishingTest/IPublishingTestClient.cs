@@ -1,8 +1,8 @@
 using System;
 using Http = System.Net.Http;
-using Pets = PublishingTest.Service.Pets;
-using Stores = PublishingTest.Service.Stores;
-using Users = PublishingTest.Service.Users;
+using Pets = PublishingTest.Services.Pets;
+using Stores = PublishingTest.Services.Stores;
+using Users = PublishingTest.Services.Users;
 
 namespace PublishingTest;
 

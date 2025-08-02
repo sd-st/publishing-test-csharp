@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using PublishingTest.Models.Stores.Orders.OrderCreateParamsProperties;
 
-namespace PublishingTest.Tests.Service.Stores.Orders;
+namespace PublishingTest.Tests.Services.Stores.Orders;
 
 public class OrderServiceTest : TestBase
 {

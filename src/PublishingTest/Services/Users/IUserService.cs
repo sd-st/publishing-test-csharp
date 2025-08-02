@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using PublishingTest.Models.Users;
 
-namespace PublishingTest.Service.Users;
+namespace PublishingTest.Services.Users;
 
 public interface IUserService
 {

@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using PublishingTest.Models.Pets;
 
-namespace PublishingTest.Service.Pets;
+namespace PublishingTest.Services.Pets;
 
 public sealed class PetService : IPetService
 {

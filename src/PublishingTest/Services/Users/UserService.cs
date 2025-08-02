@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using PublishingTest.Models.Users;
 
-namespace PublishingTest.Service.Users;
+namespace PublishingTest.Services.Users;
 
 public sealed class UserService : IUserService
 {
