@@ -13,10 +13,8 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
-### Dotnet
-
 ```bash
-dotnet add reference /path/to/publishing-test-csharp/src/PublishingTest/
+dotnet add package PublishingTest
 ```
 
 ## Usage
