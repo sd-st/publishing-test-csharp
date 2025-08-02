@@ -92,6 +92,6 @@ public class UserServiceTest : TestBase
     [Fact]
     public async Task Logout_Works()
     {
-        await this.client.Users.Logout(new() { });
+        await this.client.Users.Logout(new());
     }
 }
