@@ -31,10 +31,7 @@ using System;
 // Configured using the PETSTORE_API_KEY and PUBLISHING_TEST_BASE_URL environment variables
 PublishingTestClient client = new();
 
-OrderCreateParams param = new()
-{
-
-};
+OrderCreateParams param = new();
 
 var order = await client.Stores.Orders.Create(param);
 
@@ -57,10 +54,7 @@ Or manually:
 ```C#
 using PublishingTest;
 
-PublishingTestClient client = new()
-{
-  APIKey = "My API Key"
-};
+PublishingTestClient client = new() { APIKey = "My API Key" };
 ```
 
 Alternatively, you can use a combination of the two approaches.
