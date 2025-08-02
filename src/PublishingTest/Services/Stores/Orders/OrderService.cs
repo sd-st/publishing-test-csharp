@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using PublishingTest.Models;
 using PublishingTest.Models.Stores.Orders;
 
-namespace PublishingTest.Service.Stores.Orders;
+namespace PublishingTest.Services.Stores.Orders;
 
 public sealed class OrderService : IOrderService
 {

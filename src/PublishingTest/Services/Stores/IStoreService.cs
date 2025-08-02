@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PublishingTest.Models.Stores;
-using Orders = PublishingTest.Service.Stores.Orders;
+using Orders = PublishingTest.Services.Stores.Orders;
 
-namespace PublishingTest.Service.Stores;
+namespace PublishingTest.Services.Stores;
 
 public interface IStoreService
 {

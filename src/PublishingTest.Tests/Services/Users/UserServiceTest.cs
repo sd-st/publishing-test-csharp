@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace PublishingTest.Tests.Service.Users;
+namespace PublishingTest.Tests.Services.Users;
 
 public class UserServiceTest : TestBase
 {

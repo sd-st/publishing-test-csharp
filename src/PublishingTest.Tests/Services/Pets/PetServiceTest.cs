@@ -3,7 +3,7 @@ using PublishingTest.Models.Pets.PetCreateParamsProperties;
 using PetFindByStatusParamsProperties = PublishingTest.Models.Pets.PetFindByStatusParamsProperties;
 using PetUpdateParamsProperties = PublishingTest.Models.Pets.PetUpdateParamsProperties;
 
-namespace PublishingTest.Tests.Service.Pets;
+namespace PublishingTest.Tests.Services.Pets;
 
 public class PetServiceTest : TestBase
 {

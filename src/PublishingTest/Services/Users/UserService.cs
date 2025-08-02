@@ -1,22 +1,21 @@
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using PublishingTest.Models.Pets;
+using PublishingTest.Models.Users;
 
-namespace PublishingTest.Service.Pets;
+namespace PublishingTest.Services.Users;
 
-public sealed class PetService : IPetService
+public sealed class UserService : IUserService
 {
     readonly IPublishingTestClient _client;
 
-    public PetService(IPublishingTestClient client)
+    public UserService(IPublishingTestClient client)
     {
         _client = client;
     }
 
-    public async Task<Pet> Create(PetCreateParams @params)
+    public async Task<User> Create(UserCreateParams @params)
     {
         HttpRequestMessage webRequest = new(HttpMethod.Post, @params.Url(this._client))
         {
@@ -32,11 +31,11 @@ public sealed class PetService : IPetService
         {
             throw new HttpException(e.StatusCode, await response.Content.ReadAsStringAsync());
         }
-        return JsonSerializer.Deserialize<Pet>(await response.Content.ReadAsStringAsync())
+        return JsonSerializer.Deserialize<User>(await response.Content.ReadAsStringAsync())
             ?? throw new NullReferenceException();
     }
 
-    public async Task<Pet> Retrieve(PetRetrieveParams @params)
+    public async Task<User> Retrieve(UserRetrieveParams @params)
     {
         HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
         @params.AddHeadersToRequest(webRequest, this._client);
@@ -49,11 +48,11 @@ public sealed class PetService : IPetService
         {
             throw new HttpException(e.StatusCode, await response.Content.ReadAsStringAsync());
         }
-        return JsonSerializer.Deserialize<Pet>(await response.Content.ReadAsStringAsync())
+        return JsonSerializer.Deserialize<User>(await response.Content.ReadAsStringAsync())
             ?? throw new NullReferenceException();
     }
 
-    public async Task<Pet> Update(PetUpdateParams @params)
+    public async Task Update(UserUpdateParams @params)
     {
         HttpRequestMessage webRequest = new(HttpMethod.Put, @params.Url(this._client))
         {
@@ -69,11 +68,9 @@ public sealed class PetService : IPetService
         {
             throw new HttpException(e.StatusCode, await response.Content.ReadAsStringAsync());
         }
-        return JsonSerializer.Deserialize<Pet>(await response.Content.ReadAsStringAsync())
-            ?? throw new NullReferenceException();
     }
 
-    public async Task Delete(PetDeleteParams @params)
+    public async Task Delete(UserDeleteParams @params)
     {
         HttpRequestMessage webRequest = new(HttpMethod.Delete, @params.Url(this._client));
         @params.AddHeadersToRequest(webRequest, this._client);
@@ -88,56 +85,7 @@ public sealed class PetService : IPetService
         }
     }
 
-    public async Task<List<Pet>> FindByStatus(PetFindByStatusParams @params)
-    {
-        HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
-        @params.AddHeadersToRequest(webRequest, this._client);
-        using HttpResponseMessage response = await _client.HttpClient.SendAsync(webRequest);
-        try
-        {
-            response.EnsureSuccessStatusCode();
-        }
-        catch (HttpRequestException e)
-        {
-            throw new HttpException(e.StatusCode, await response.Content.ReadAsStringAsync());
-        }
-        return JsonSerializer.Deserialize<List<Pet>>(await response.Content.ReadAsStringAsync())
-            ?? throw new NullReferenceException();
-    }
-
-    public async Task<List<Pet>> FindByTags(PetFindByTagsParams @params)
-    {
-        HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
-        @params.AddHeadersToRequest(webRequest, this._client);
-        using HttpResponseMessage response = await _client.HttpClient.SendAsync(webRequest);
-        try
-        {
-            response.EnsureSuccessStatusCode();
-        }
-        catch (HttpRequestException e)
-        {
-            throw new HttpException(e.StatusCode, await response.Content.ReadAsStringAsync());
-        }
-        return JsonSerializer.Deserialize<List<Pet>>(await response.Content.ReadAsStringAsync())
-            ?? throw new NullReferenceException();
-    }
-
-    public async Task UpdateByID(PetUpdateByIDParams @params)
-    {
-        HttpRequestMessage webRequest = new(HttpMethod.Post, @params.Url(this._client));
-        @params.AddHeadersToRequest(webRequest, this._client);
-        using HttpResponseMessage response = await _client.HttpClient.SendAsync(webRequest);
-        try
-        {
-            response.EnsureSuccessStatusCode();
-        }
-        catch (HttpRequestException e)
-        {
-            throw new HttpException(e.StatusCode, await response.Content.ReadAsStringAsync());
-        }
-    }
-
-    public async Task<PetUploadImageResponse> UploadImage(PetUploadImageParams @params)
+    public async Task<User> CreateWithList(UserCreateWithListParams @params)
     {
         HttpRequestMessage webRequest = new(HttpMethod.Post, @params.Url(this._client))
         {
@@ -153,8 +101,39 @@ public sealed class PetService : IPetService
         {
             throw new HttpException(e.StatusCode, await response.Content.ReadAsStringAsync());
         }
-        return JsonSerializer.Deserialize<PetUploadImageResponse>(
-                await response.Content.ReadAsStringAsync()
-            ) ?? throw new NullReferenceException();
+        return JsonSerializer.Deserialize<User>(await response.Content.ReadAsStringAsync())
+            ?? throw new NullReferenceException();
+    }
+
+    public async Task<string> Login(UserLoginParams @params)
+    {
+        HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
+        @params.AddHeadersToRequest(webRequest, this._client);
+        using HttpResponseMessage response = await _client.HttpClient.SendAsync(webRequest);
+        try
+        {
+            response.EnsureSuccessStatusCode();
+        }
+        catch (HttpRequestException e)
+        {
+            throw new HttpException(e.StatusCode, await response.Content.ReadAsStringAsync());
+        }
+        return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync())
+            ?? throw new NullReferenceException();
+    }
+
+    public async Task Logout(UserLogoutParams @params)
+    {
+        HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
+        @params.AddHeadersToRequest(webRequest, this._client);
+        using HttpResponseMessage response = await _client.HttpClient.SendAsync(webRequest);
+        try
+        {
+            response.EnsureSuccessStatusCode();
+        }
+        catch (HttpRequestException e)
+        {
+            throw new HttpException(e.StatusCode, await response.Content.ReadAsStringAsync());
+        }
     }
 }
