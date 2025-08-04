@@ -7,7 +7,7 @@
 >
 > **We'd love your feedback!** Please share any suggestions, bug reports, feature requests, or general thoughts by [filing an issue](https://www.github.com/sd-st/publishing-test-csharp/issues/new).
 
-The Publishing Test C# SDK provides convenient access to the Publishing Test REST API from applications written in C#.
+The Publishing Test C# SDK provides convenient access to the [Publishing Test REST API](google.com) from applications written in C#.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
