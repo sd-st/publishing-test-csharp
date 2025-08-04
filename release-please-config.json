@@ -61,6 +61,11 @@
   ],
   "release-type": "simple",
   "extra-files": [
-    "README.md"
+    "README.md",
+    {
+      "type": "xml",
+      "path": "src/() => ctx.spec().csharp.PackageName/() => ctx.spec().csharp.PackageName.csproj",
+      "xpath": "//Project/PropertyGroup/VersionPrefix"
+    }
   ]
 }
