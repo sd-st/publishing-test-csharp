@@ -64,7 +64,7 @@
     "README.md",
     {
       "type": "xml",
-      "path": "src/() => ctx.spec().csharp.PackageName/() => ctx.spec().csharp.PackageName.csproj",
+      "path": "src/PublishingTest/PublishingTest.csproj",
       "xpath": "//Project/PropertyGroup/VersionPrefix"
     }
   ]
