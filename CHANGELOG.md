@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.2 (2025-08-04)
+
+Full Changelog: [v0.1.1...v0.1.2](https://github.com/sd-st/publishing-test-csharp/compare/v0.1.1...v0.1.2)
+
+### Chores
+
+* **internal:** codegen related update ([fc07fbf](https://github.com/sd-st/publishing-test-csharp/commit/fc07fbf247d3b4e650d41dd1a356843ed4979fdd))
+
 ## 0.1.1 (2025-08-04)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/sd-st/publishing-test-csharp/compare/v0.1.0...v0.1.1)
