@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 (2025-08-04)
+
+Full Changelog: [v0.1.2...v0.2.0](https://github.com/sd-st/publishing-test-csharp/compare/v0.1.2...v0.2.0)
+
+### Features
+
+* **api:** update via SDK Studio ([019736f](https://github.com/sd-st/publishing-test-csharp/commit/019736f82ebbdddf53529c7b723b638737c45f87))
+
 ## 0.1.2 (2025-08-04)
 
 Full Changelog: [v0.1.1...v0.1.2](https://github.com/sd-st/publishing-test-csharp/compare/v0.1.1...v0.1.2)
