@@ -3,9 +3,9 @@
 # You can run this workflow by navigating to https://www.github.com/sd-st/publishing-test-csharp/actions/workflows/publish-nuget.yml
 name: Publish to NuGet
 on:
-  workflow_dispatch:release:
-types: [published]
-
+  workflow_dispatch:
+    release:
+      types: [published]
 jobs:
   publish:
     name: publish
