@@ -16,13 +16,13 @@ public sealed class PetService : IPetService
         _client = client;
     }
 
-    public async Task<Pet> Create(PetCreateParams @params)
+    public async Task<Pet> Create(PetCreateParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Post, @params.Url(this._client))
+        using HttpRequestMessage webRequest = new(HttpMethod.Post, parameters.Url(this._client))
         {
-            Content = @params.BodyContent(),
+            Content = parameters.BodyContent(),
         };
-        @params.AddHeadersToRequest(webRequest, this._client);
+        parameters.AddHeadersToRequest(webRequest, this._client);
         using HttpResponseMessage response = await _client
             .HttpClient.SendAsync(webRequest)
             .ConfigureAwait(false);
@@ -39,10 +39,10 @@ public sealed class PetService : IPetService
             ) ?? throw new NullReferenceException();
     }
 
-    public async Task<Pet> Retrieve(PetRetrieveParams @params)
+    public async Task<Pet> Retrieve(PetRetrieveParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
-        @params.AddHeadersToRequest(webRequest, this._client);
+        using HttpRequestMessage webRequest = new(HttpMethod.Get, parameters.Url(this._client));
+        parameters.AddHeadersToRequest(webRequest, this._client);
         using HttpResponseMessage response = await _client
             .HttpClient.SendAsync(webRequest)
             .ConfigureAwait(false);
@@ -59,13 +59,13 @@ public sealed class PetService : IPetService
             ) ?? throw new NullReferenceException();
     }
 
-    public async Task<Pet> Update(PetUpdateParams @params)
+    public async Task<Pet> Update(PetUpdateParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Put, @params.Url(this._client))
+        using HttpRequestMessage webRequest = new(HttpMethod.Put, parameters.Url(this._client))
         {
-            Content = @params.BodyContent(),
+            Content = parameters.BodyContent(),
         };
-        @params.AddHeadersToRequest(webRequest, this._client);
+        parameters.AddHeadersToRequest(webRequest, this._client);
         using HttpResponseMessage response = await _client
             .HttpClient.SendAsync(webRequest)
             .ConfigureAwait(false);
@@ -82,10 +82,10 @@ public sealed class PetService : IPetService
             ) ?? throw new NullReferenceException();
     }
 
-    public async Task Delete(PetDeleteParams @params)
+    public async Task Delete(PetDeleteParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Delete, @params.Url(this._client));
-        @params.AddHeadersToRequest(webRequest, this._client);
+        using HttpRequestMessage webRequest = new(HttpMethod.Delete, parameters.Url(this._client));
+        parameters.AddHeadersToRequest(webRequest, this._client);
         using HttpResponseMessage response = await _client
             .HttpClient.SendAsync(webRequest)
             .ConfigureAwait(false);
@@ -98,10 +98,10 @@ public sealed class PetService : IPetService
         }
     }
 
-    public async Task<List<Pet>> FindByStatus(PetFindByStatusParams @params)
+    public async Task<List<Pet>> FindByStatus(PetFindByStatusParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
-        @params.AddHeadersToRequest(webRequest, this._client);
+        using HttpRequestMessage webRequest = new(HttpMethod.Get, parameters.Url(this._client));
+        parameters.AddHeadersToRequest(webRequest, this._client);
         using HttpResponseMessage response = await _client
             .HttpClient.SendAsync(webRequest)
             .ConfigureAwait(false);
@@ -118,10 +118,10 @@ public sealed class PetService : IPetService
             ) ?? throw new NullReferenceException();
     }
 
-    public async Task<List<Pet>> FindByTags(PetFindByTagsParams @params)
+    public async Task<List<Pet>> FindByTags(PetFindByTagsParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
-        @params.AddHeadersToRequest(webRequest, this._client);
+        using HttpRequestMessage webRequest = new(HttpMethod.Get, parameters.Url(this._client));
+        parameters.AddHeadersToRequest(webRequest, this._client);
         using HttpResponseMessage response = await _client
             .HttpClient.SendAsync(webRequest)
             .ConfigureAwait(false);
@@ -138,10 +138,10 @@ public sealed class PetService : IPetService
             ) ?? throw new NullReferenceException();
     }
 
-    public async Task UpdateByID(PetUpdateByIDParams @params)
+    public async Task UpdateByID(PetUpdateByIDParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Post, @params.Url(this._client));
-        @params.AddHeadersToRequest(webRequest, this._client);
+        using HttpRequestMessage webRequest = new(HttpMethod.Post, parameters.Url(this._client));
+        parameters.AddHeadersToRequest(webRequest, this._client);
         using HttpResponseMessage response = await _client
             .HttpClient.SendAsync(webRequest)
             .ConfigureAwait(false);
@@ -154,13 +154,13 @@ public sealed class PetService : IPetService
         }
     }
 
-    public async Task<PetUploadImageResponse> UploadImage(PetUploadImageParams @params)
+    public async Task<PetUploadImageResponse> UploadImage(PetUploadImageParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Post, @params.Url(this._client))
+        using HttpRequestMessage webRequest = new(HttpMethod.Post, parameters.Url(this._client))
         {
-            Content = @params.BodyContent(),
+            Content = parameters.BodyContent(),
         };
-        @params.AddHeadersToRequest(webRequest, this._client);
+        parameters.AddHeadersToRequest(webRequest, this._client);
         using HttpResponseMessage response = await _client
             .HttpClient.SendAsync(webRequest)
             .ConfigureAwait(false);

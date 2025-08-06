@@ -16,13 +16,13 @@ public sealed class OrderService : IOrderService
         _client = client;
     }
 
-    public async Task<Order> Create(OrderCreateParams @params)
+    public async Task<Order> Create(OrderCreateParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Post, @params.Url(this._client))
+        using HttpRequestMessage webRequest = new(HttpMethod.Post, parameters.Url(this._client))
         {
-            Content = @params.BodyContent(),
+            Content = parameters.BodyContent(),
         };
-        @params.AddHeadersToRequest(webRequest, this._client);
+        parameters.AddHeadersToRequest(webRequest, this._client);
         using HttpResponseMessage response = await _client
             .HttpClient.SendAsync(webRequest)
             .ConfigureAwait(false);
@@ -39,10 +39,10 @@ public sealed class OrderService : IOrderService
             ) ?? throw new NullReferenceException();
     }
 
-    public async Task<Order> Retrieve(OrderRetrieveParams @params)
+    public async Task<Order> Retrieve(OrderRetrieveParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
-        @params.AddHeadersToRequest(webRequest, this._client);
+        using HttpRequestMessage webRequest = new(HttpMethod.Get, parameters.Url(this._client));
+        parameters.AddHeadersToRequest(webRequest, this._client);
         using HttpResponseMessage response = await _client
             .HttpClient.SendAsync(webRequest)
             .ConfigureAwait(false);
@@ -59,10 +59,10 @@ public sealed class OrderService : IOrderService
             ) ?? throw new NullReferenceException();
     }
 
-    public async Task Delete(OrderDeleteParams @params)
+    public async Task Delete(OrderDeleteParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Delete, @params.Url(this._client));
-        @params.AddHeadersToRequest(webRequest, this._client);
+        using HttpRequestMessage webRequest = new(HttpMethod.Delete, parameters.Url(this._client));
+        parameters.AddHeadersToRequest(webRequest, this._client);
         using HttpResponseMessage response = await _client
             .HttpClient.SendAsync(webRequest)
             .ConfigureAwait(false);

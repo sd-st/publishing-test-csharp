@@ -24,10 +24,10 @@ public sealed class StoreService : IStoreService
         get { return _orders.Value; }
     }
 
-    public async Task<Dictionary<string, int>> ListInventory(StoreListInventoryParams @params)
+    public async Task<Dictionary<string, int>> ListInventory(StoreListInventoryParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Get, @params.Url(this._client));
-        @params.AddHeadersToRequest(webRequest, this._client);
+        using HttpRequestMessage webRequest = new(HttpMethod.Get, parameters.Url(this._client));
+        parameters.AddHeadersToRequest(webRequest, this._client);
         using HttpResponseMessage response = await _client
             .HttpClient.SendAsync(webRequest)
             .ConfigureAwait(false);

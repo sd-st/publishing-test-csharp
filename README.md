@@ -29,9 +29,9 @@ using System;
 // Configured using the PETSTORE_API_KEY and PUBLISHING_TEST_BASE_URL environment variables
 PublishingTestClient client = new();
 
-OrderCreateParams param = new();
+OrderCreateParams parameters = new();
 
-var order = await client.Stores.Orders.Create(param);
+var order = await client.Stores.Orders.Create(parameters);
 
 Console.WriteLine(order);
 ```
