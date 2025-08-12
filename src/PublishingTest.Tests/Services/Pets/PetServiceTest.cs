@@ -1,105 +1,66 @@
 using System.Threading.Tasks;
-using PublishingTest.Models.Pets.PetCreateParamsProperties;
-using PetFindByStatusParamsProperties = PublishingTest.Models.Pets.PetFindByStatusParamsProperties;
-using PetUpdateParamsProperties = PublishingTest.Models.Pets.PetUpdateParamsProperties;
 
 namespace PublishingTest.Tests.Services.Pets;
 
 public class PetServiceTest : TestBase
 {
-    [Fact]
+    [Fact(Skip = "Prism tests are disabled")]
     public async Task Create_Works()
     {
-        var pet = await this.client.Pets.Create(
-            new()
-            {
-                Name = "doggie",
-                PhotoURLs = ["string"],
-                ID = 10,
-                Category = new() { ID = 1, Name = "Dogs" },
-                Status = Status.Available,
-                Tags = [new() { ID = 0, Name = "name" }],
-            }
-        );
+        var pet = await this.client.Pets.Create(new() { Name = "doggie", PhotoURLs = ["string"] });
         pet.Validate();
     }
 
-    [Fact]
+    [Fact(Skip = "Prism tests are disabled")]
     public async Task Retrieve_Works()
     {
         var pet = await this.client.Pets.Retrieve(new() { PetID = 0 });
         pet.Validate();
     }
 
-    [Fact]
+    [Fact(Skip = "Prism tests are disabled")]
     public async Task Update_Works()
     {
-        var pet = await this.client.Pets.Update(
-            new()
-            {
-                Name = "doggie",
-                PhotoURLs = ["string"],
-                ID = 10,
-                Category = new() { ID = 1, Name = "Dogs" },
-                Status = PetUpdateParamsProperties::Status.Available,
-                Tags = [new() { ID = 0, Name = "name" }],
-            }
-        );
+        var pet = await this.client.Pets.Update(new() { Name = "doggie", PhotoURLs = ["string"] });
         pet.Validate();
     }
 
-    [Fact]
+    [Fact(Skip = "Prism tests are disabled")]
     public async Task Delete_Works()
     {
         await this.client.Pets.Delete(new() { PetID = 0 });
     }
 
-    [Fact]
+    [Fact(Skip = "Prism tests are disabled")]
     public async Task FindByStatus_Works()
     {
-        var pets = await this.client.Pets.FindByStatus(
-            new() { Status = PetFindByStatusParamsProperties::Status.Available }
-        );
+        var pets = await this.client.Pets.FindByStatus(new());
         foreach (var item in pets)
         {
             item.Validate();
         }
     }
 
-    [Fact]
+    [Fact(Skip = "Prism tests are disabled")]
     public async Task FindByTags_Works()
     {
-        var pets = await this.client.Pets.FindByTags(new() { Tags = ["string"] });
+        var pets = await this.client.Pets.FindByTags(new());
         foreach (var item in pets)
         {
             item.Validate();
         }
     }
 
-    [Fact]
+    [Fact(Skip = "Prism tests are disabled")]
     public async Task UpdateByID_Works()
     {
-        await this.client.Pets.UpdateByID(
-            new()
-            {
-                PetID = 0,
-                Name = "name",
-                Status = "status",
-            }
-        );
+        await this.client.Pets.UpdateByID(new() { PetID = 0 });
     }
 
-    [Fact]
+    [Fact(Skip = "Prism tests are disabled")]
     public async Task UploadImage_Works()
     {
-        var response = await this.client.Pets.UploadImage(
-            new()
-            {
-                PetID = 0,
-                AdditionalMetadata = "additionalMetadata",
-                Image = "a value",
-            }
-        );
+        var response = await this.client.Pets.UploadImage(new() { PetID = 0 });
         response.Validate();
     }
 }

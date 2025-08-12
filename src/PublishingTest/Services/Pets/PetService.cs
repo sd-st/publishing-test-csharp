@@ -18,13 +18,13 @@ public sealed class PetService : IPetService
 
     public async Task<Pet> Create(PetCreateParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Post, parameters.Url(this._client))
+        using HttpRequestMessage request = new(HttpMethod.Post, parameters.Url(this._client))
         {
             Content = parameters.BodyContent(),
         };
-        parameters.AddHeadersToRequest(webRequest, this._client);
-        using HttpResponseMessage response = await _client
-            .HttpClient.SendAsync(webRequest)
+        parameters.AddHeadersToRequest(request, this._client);
+        using HttpResponseMessage response = await this
+            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
@@ -33,6 +33,7 @@ public sealed class PetService : IPetService
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
         }
+
         return JsonSerializer.Deserialize<Pet>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
                 ModelBase.SerializerOptions
@@ -41,10 +42,10 @@ public sealed class PetService : IPetService
 
     public async Task<Pet> Retrieve(PetRetrieveParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Get, parameters.Url(this._client));
-        parameters.AddHeadersToRequest(webRequest, this._client);
-        using HttpResponseMessage response = await _client
-            .HttpClient.SendAsync(webRequest)
+        using HttpRequestMessage request = new(HttpMethod.Get, parameters.Url(this._client));
+        parameters.AddHeadersToRequest(request, this._client);
+        using HttpResponseMessage response = await this
+            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
@@ -53,6 +54,7 @@ public sealed class PetService : IPetService
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
         }
+
         return JsonSerializer.Deserialize<Pet>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
                 ModelBase.SerializerOptions
@@ -61,13 +63,13 @@ public sealed class PetService : IPetService
 
     public async Task<Pet> Update(PetUpdateParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Put, parameters.Url(this._client))
+        using HttpRequestMessage request = new(HttpMethod.Put, parameters.Url(this._client))
         {
             Content = parameters.BodyContent(),
         };
-        parameters.AddHeadersToRequest(webRequest, this._client);
-        using HttpResponseMessage response = await _client
-            .HttpClient.SendAsync(webRequest)
+        parameters.AddHeadersToRequest(request, this._client);
+        using HttpResponseMessage response = await this
+            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
@@ -76,6 +78,7 @@ public sealed class PetService : IPetService
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
         }
+
         return JsonSerializer.Deserialize<Pet>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
                 ModelBase.SerializerOptions
@@ -84,10 +87,10 @@ public sealed class PetService : IPetService
 
     public async Task Delete(PetDeleteParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Delete, parameters.Url(this._client));
-        parameters.AddHeadersToRequest(webRequest, this._client);
-        using HttpResponseMessage response = await _client
-            .HttpClient.SendAsync(webRequest)
+        using HttpRequestMessage request = new(HttpMethod.Delete, parameters.Url(this._client));
+        parameters.AddHeadersToRequest(request, this._client);
+        using HttpResponseMessage response = await this
+            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
@@ -100,10 +103,10 @@ public sealed class PetService : IPetService
 
     public async Task<List<Pet>> FindByStatus(PetFindByStatusParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Get, parameters.Url(this._client));
-        parameters.AddHeadersToRequest(webRequest, this._client);
-        using HttpResponseMessage response = await _client
-            .HttpClient.SendAsync(webRequest)
+        using HttpRequestMessage request = new(HttpMethod.Get, parameters.Url(this._client));
+        parameters.AddHeadersToRequest(request, this._client);
+        using HttpResponseMessage response = await this
+            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
@@ -112,6 +115,7 @@ public sealed class PetService : IPetService
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
         }
+
         return JsonSerializer.Deserialize<List<Pet>>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
                 ModelBase.SerializerOptions
@@ -120,10 +124,10 @@ public sealed class PetService : IPetService
 
     public async Task<List<Pet>> FindByTags(PetFindByTagsParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Get, parameters.Url(this._client));
-        parameters.AddHeadersToRequest(webRequest, this._client);
-        using HttpResponseMessage response = await _client
-            .HttpClient.SendAsync(webRequest)
+        using HttpRequestMessage request = new(HttpMethod.Get, parameters.Url(this._client));
+        parameters.AddHeadersToRequest(request, this._client);
+        using HttpResponseMessage response = await this
+            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
@@ -132,6 +136,7 @@ public sealed class PetService : IPetService
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
         }
+
         return JsonSerializer.Deserialize<List<Pet>>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
                 ModelBase.SerializerOptions
@@ -140,10 +145,10 @@ public sealed class PetService : IPetService
 
     public async Task UpdateByID(PetUpdateByIDParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Post, parameters.Url(this._client));
-        parameters.AddHeadersToRequest(webRequest, this._client);
-        using HttpResponseMessage response = await _client
-            .HttpClient.SendAsync(webRequest)
+        using HttpRequestMessage request = new(HttpMethod.Post, parameters.Url(this._client));
+        parameters.AddHeadersToRequest(request, this._client);
+        using HttpResponseMessage response = await this
+            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
@@ -156,13 +161,13 @@ public sealed class PetService : IPetService
 
     public async Task<PetUploadImageResponse> UploadImage(PetUploadImageParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Post, parameters.Url(this._client))
+        using HttpRequestMessage request = new(HttpMethod.Post, parameters.Url(this._client))
         {
             Content = parameters.BodyContent(),
         };
-        parameters.AddHeadersToRequest(webRequest, this._client);
-        using HttpResponseMessage response = await _client
-            .HttpClient.SendAsync(webRequest)
+        parameters.AddHeadersToRequest(request, this._client);
+        using HttpResponseMessage response = await this
+            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
@@ -171,6 +176,7 @@ public sealed class PetService : IPetService
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
         }
+
         return JsonSerializer.Deserialize<PetUploadImageResponse>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
                 ModelBase.SerializerOptions

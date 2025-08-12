@@ -26,10 +26,10 @@ public sealed class StoreService : IStoreService
 
     public async Task<Dictionary<string, int>> ListInventory(StoreListInventoryParams parameters)
     {
-        using HttpRequestMessage webRequest = new(HttpMethod.Get, parameters.Url(this._client));
-        parameters.AddHeadersToRequest(webRequest, this._client);
-        using HttpResponseMessage response = await _client
-            .HttpClient.SendAsync(webRequest)
+        using HttpRequestMessage request = new(HttpMethod.Get, parameters.Url(this._client));
+        parameters.AddHeadersToRequest(request, this._client);
+        using HttpResponseMessage response = await this
+            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
@@ -38,6 +38,7 @@ public sealed class StoreService : IStoreService
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
         }
+
         return JsonSerializer.Deserialize<Dictionary<string, int>>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
                 ModelBase.SerializerOptions
