@@ -29,9 +29,9 @@ This library requires .NET 8 or later.
 See the [`examples`](examples) directory for complete and runnable examples.
 
 ```csharp
+using System;
 using PublishingTest;
 using PublishingTest.Models.Stores.Orders;
-using System;
 
 // Configured using the PETSTORE_API_KEY and PUBLISHING_TEST_BASE_URL environment variables
 PublishingTestClient client = new();
