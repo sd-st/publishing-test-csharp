@@ -1,13 +1,14 @@
 using System;
 using System.Text.Json.Serialization;
+using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Models.Pets.PetFindByStatusParamsProperties;
 
 /// <summary>
 /// Status values that need to be considered for filter
 /// </summary>
-[JsonConverter(typeof(EnumConverter<Status, string>))]
-public sealed record class Status(string value) : IEnum<Status, string>
+[JsonConverter(typeof(PublishingTest::EnumConverter<Status, string>))]
+public sealed record class Status(string value) : PublishingTest::IEnum<Status, string>
 {
     public static readonly Status Available = new("available");
 

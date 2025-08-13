@@ -1,16 +1,17 @@
 using System;
 using System.Net.Http;
+using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Models.Users;
 
 /// <summary>
 /// Get user by user name
 /// </summary>
-public sealed record class UserRetrieveParams : ParamsBase
+public sealed record class UserRetrieveParams : PublishingTest::ParamsBase
 {
     public required string Username;
 
-    public override Uri Url(IPublishingTestClient client)
+    public override Uri Url(PublishingTest::IPublishingTestClient client)
     {
         return new UriBuilder(
             client.BaseUrl.ToString().TrimEnd('/') + string.Format("/user/{0}", this.Username)
@@ -20,12 +21,15 @@ public sealed record class UserRetrieveParams : ParamsBase
         }.Uri;
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IPublishingTestClient client)
+    public void AddHeadersToRequest(
+        HttpRequestMessage request,
+        PublishingTest::IPublishingTestClient client
+    )
     {
-        ParamsBase.AddDefaultHeaders(request, client);
+        PublishingTest::ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)
         {
-            ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
+            PublishingTest::ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
     }
 }

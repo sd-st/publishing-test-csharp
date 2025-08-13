@@ -3,14 +3,15 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using PublishingTest.Models.Users;
+using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Services.Users;
 
 public sealed class UserService : IUserService
 {
-    readonly IPublishingTestClient _client;
+    readonly PublishingTest::IPublishingTestClient _client;
 
-    public UserService(IPublishingTestClient client)
+    public UserService(PublishingTest::IPublishingTestClient client)
     {
         _client = client;
     }
@@ -27,7 +28,7 @@ public sealed class UserService : IUserService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -35,7 +36,7 @@ public sealed class UserService : IUserService
 
         return JsonSerializer.Deserialize<User>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
+                PublishingTest::ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
     }
 
@@ -48,7 +49,7 @@ public sealed class UserService : IUserService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -56,7 +57,7 @@ public sealed class UserService : IUserService
 
         return JsonSerializer.Deserialize<User>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
+                PublishingTest::ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
     }
 
@@ -72,7 +73,7 @@ public sealed class UserService : IUserService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -88,7 +89,7 @@ public sealed class UserService : IUserService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -107,7 +108,7 @@ public sealed class UserService : IUserService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -115,7 +116,7 @@ public sealed class UserService : IUserService
 
         return JsonSerializer.Deserialize<User>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
+                PublishingTest::ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
     }
 
@@ -128,7 +129,7 @@ public sealed class UserService : IUserService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -136,7 +137,7 @@ public sealed class UserService : IUserService
 
         return JsonSerializer.Deserialize<string>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
+                PublishingTest::ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
     }
 
@@ -149,7 +150,7 @@ public sealed class UserService : IUserService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );

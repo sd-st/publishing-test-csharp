@@ -5,14 +5,15 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using PublishingTest.Models.Stores;
 using Orders = PublishingTest.Services.Stores.Orders;
+using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Services.Stores;
 
 public sealed class StoreService : IStoreService
 {
-    readonly IPublishingTestClient _client;
+    readonly PublishingTest::IPublishingTestClient _client;
 
-    public StoreService(IPublishingTestClient client)
+    public StoreService(PublishingTest::IPublishingTestClient client)
     {
         _client = client;
         _orders = new(() => new Orders::OrderService(client));
@@ -33,7 +34,7 @@ public sealed class StoreService : IStoreService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -41,7 +42,7 @@ public sealed class StoreService : IStoreService
 
         return JsonSerializer.Deserialize<Dictionary<string, int>>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
+                PublishingTest::ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
     }
 }

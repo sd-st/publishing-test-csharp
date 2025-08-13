@@ -4,13 +4,14 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using OrderCreateParamsProperties = PublishingTest.Models.Stores.Orders.OrderCreateParamsProperties;
+using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Models.Stores.Orders;
 
 /// <summary>
 /// Place a new order in the store
 /// </summary>
-public sealed record class OrderCreateParams : ParamsBase
+public sealed record class OrderCreateParams : PublishingTest::ParamsBase
 {
     public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
 
@@ -21,7 +22,10 @@ public sealed record class OrderCreateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("id", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<long?>(
+                element,
+                PublishingTest::ModelBase.SerializerOptions
+            );
         }
         set { this.BodyProperties["id"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -33,7 +37,10 @@ public sealed record class OrderCreateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("complete", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<bool?>(
+                element,
+                PublishingTest::ModelBase.SerializerOptions
+            );
         }
         set { this.BodyProperties["complete"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -45,7 +52,10 @@ public sealed record class OrderCreateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("petId", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<long?>(
+                element,
+                PublishingTest::ModelBase.SerializerOptions
+            );
         }
         set { this.BodyProperties["petId"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -57,7 +67,10 @@ public sealed record class OrderCreateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("quantity", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<int?>(
+                element,
+                PublishingTest::ModelBase.SerializerOptions
+            );
         }
         set { this.BodyProperties["quantity"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -69,7 +82,10 @@ public sealed record class OrderCreateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("shipDate", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTime?>(
+                element,
+                PublishingTest::ModelBase.SerializerOptions
+            );
         }
         set { this.BodyProperties["shipDate"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -86,13 +102,13 @@ public sealed record class OrderCreateParams : ParamsBase
 
             return JsonSerializer.Deserialize<OrderCreateParamsProperties::Status?>(
                 element,
-                ModelBase.SerializerOptions
+                PublishingTest::ModelBase.SerializerOptions
             );
         }
         set { this.BodyProperties["status"] = JsonSerializer.SerializeToElement(value); }
     }
 
-    public override Uri Url(IPublishingTestClient client)
+    public override Uri Url(PublishingTest::IPublishingTestClient client)
     {
         return new UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/store/order")
         {
@@ -109,12 +125,15 @@ public sealed record class OrderCreateParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IPublishingTestClient client)
+    public void AddHeadersToRequest(
+        HttpRequestMessage request,
+        PublishingTest::IPublishingTestClient client
+    )
     {
-        ParamsBase.AddDefaultHeaders(request, client);
+        PublishingTest::ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)
         {
-            ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
+            PublishingTest::ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
     }
 }

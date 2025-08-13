@@ -4,14 +4,15 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using PublishingTest.Models;
 using PublishingTest.Models.Stores.Orders;
+using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Services.Stores.Orders;
 
 public sealed class OrderService : IOrderService
 {
-    readonly IPublishingTestClient _client;
+    readonly PublishingTest::IPublishingTestClient _client;
 
-    public OrderService(IPublishingTestClient client)
+    public OrderService(PublishingTest::IPublishingTestClient client)
     {
         _client = client;
     }
@@ -28,7 +29,7 @@ public sealed class OrderService : IOrderService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -36,7 +37,7 @@ public sealed class OrderService : IOrderService
 
         return JsonSerializer.Deserialize<Order>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
+                PublishingTest::ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
     }
 
@@ -49,7 +50,7 @@ public sealed class OrderService : IOrderService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -57,7 +58,7 @@ public sealed class OrderService : IOrderService
 
         return JsonSerializer.Deserialize<Order>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
+                PublishingTest::ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
     }
 
@@ -70,7 +71,7 @@ public sealed class OrderService : IOrderService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );

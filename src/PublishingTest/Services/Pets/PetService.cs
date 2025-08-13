@@ -4,14 +4,15 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using PublishingTest.Models.Pets;
+using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Services.Pets;
 
 public sealed class PetService : IPetService
 {
-    readonly IPublishingTestClient _client;
+    readonly PublishingTest::IPublishingTestClient _client;
 
-    public PetService(IPublishingTestClient client)
+    public PetService(PublishingTest::IPublishingTestClient client)
     {
         _client = client;
     }
@@ -28,7 +29,7 @@ public sealed class PetService : IPetService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -36,7 +37,7 @@ public sealed class PetService : IPetService
 
         return JsonSerializer.Deserialize<Pet>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
+                PublishingTest::ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
     }
 
@@ -49,7 +50,7 @@ public sealed class PetService : IPetService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -57,7 +58,7 @@ public sealed class PetService : IPetService
 
         return JsonSerializer.Deserialize<Pet>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
+                PublishingTest::ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
     }
 
@@ -73,7 +74,7 @@ public sealed class PetService : IPetService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -81,7 +82,7 @@ public sealed class PetService : IPetService
 
         return JsonSerializer.Deserialize<Pet>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
+                PublishingTest::ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
     }
 
@@ -94,7 +95,7 @@ public sealed class PetService : IPetService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -110,7 +111,7 @@ public sealed class PetService : IPetService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -118,7 +119,7 @@ public sealed class PetService : IPetService
 
         return JsonSerializer.Deserialize<List<Pet>>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
+                PublishingTest::ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
     }
 
@@ -131,7 +132,7 @@ public sealed class PetService : IPetService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -139,7 +140,7 @@ public sealed class PetService : IPetService
 
         return JsonSerializer.Deserialize<List<Pet>>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
+                PublishingTest::ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
     }
 
@@ -152,7 +153,7 @@ public sealed class PetService : IPetService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -171,7 +172,7 @@ public sealed class PetService : IPetService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpException(
+            throw new PublishingTest::HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -179,7 +180,7 @@ public sealed class PetService : IPetService
 
         return JsonSerializer.Deserialize<PetUploadImageResponse>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
+                PublishingTest::ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
     }
 }

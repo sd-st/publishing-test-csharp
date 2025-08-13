@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
+using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Models.Pets;
 
@@ -9,7 +10,7 @@ namespace PublishingTest.Models.Pets;
 /// Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3
 /// for testing.
 /// </summary>
-public sealed record class PetFindByTagsParams : ParamsBase
+public sealed record class PetFindByTagsParams : PublishingTest::ParamsBase
 {
     /// <summary>
     /// Tags to filter by
@@ -21,12 +22,15 @@ public sealed record class PetFindByTagsParams : ParamsBase
             if (!this.QueryProperties.TryGetValue("tags", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<List<string>?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<List<string>?>(
+                element,
+                PublishingTest::ModelBase.SerializerOptions
+            );
         }
         set { this.QueryProperties["tags"] = JsonSerializer.SerializeToElement(value); }
     }
 
-    public override Uri Url(IPublishingTestClient client)
+    public override Uri Url(PublishingTest::IPublishingTestClient client)
     {
         return new UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/pet/findByTags")
         {
@@ -34,12 +38,15 @@ public sealed record class PetFindByTagsParams : ParamsBase
         }.Uri;
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IPublishingTestClient client)
+    public void AddHeadersToRequest(
+        HttpRequestMessage request,
+        PublishingTest::IPublishingTestClient client
+    )
     {
-        ParamsBase.AddDefaultHeaders(request, client);
+        PublishingTest::ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)
         {
-            ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
+            PublishingTest::ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Models.Stores.Orders;
 
@@ -7,11 +8,11 @@ namespace PublishingTest.Models.Stores.Orders;
 /// For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers
 /// will generate API errors
 /// </summary>
-public sealed record class OrderDeleteParams : ParamsBase
+public sealed record class OrderDeleteParams : PublishingTest::ParamsBase
 {
     public required long OrderID;
 
-    public override Uri Url(IPublishingTestClient client)
+    public override Uri Url(PublishingTest::IPublishingTestClient client)
     {
         return new UriBuilder(
             client.BaseUrl.ToString().TrimEnd('/') + string.Format("/store/order/{0}", this.OrderID)
@@ -21,12 +22,15 @@ public sealed record class OrderDeleteParams : ParamsBase
         }.Uri;
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IPublishingTestClient client)
+    public void AddHeadersToRequest(
+        HttpRequestMessage request,
+        PublishingTest::IPublishingTestClient client
+    )
     {
-        ParamsBase.AddDefaultHeaders(request, client);
+        PublishingTest::ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)
         {
-            ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
+            PublishingTest::ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
     }
 }

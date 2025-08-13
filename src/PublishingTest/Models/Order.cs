@@ -4,11 +4,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using OrderProperties = PublishingTest.Models.OrderProperties;
+using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Models;
 
-[JsonConverter(typeof(ModelConverter<Order>))]
-public sealed record class Order : ModelBase, IFromRaw<Order>
+[JsonConverter(typeof(PublishingTest::ModelConverter<Order>))]
+public sealed record class Order : PublishingTest::ModelBase, PublishingTest::IFromRaw<Order>
 {
     public long? ID
     {
@@ -17,7 +18,10 @@ public sealed record class Order : ModelBase, IFromRaw<Order>
             if (!this.Properties.TryGetValue("id", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<long?>(
+                element,
+                PublishingTest::ModelBase.SerializerOptions
+            );
         }
         set { this.Properties["id"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -29,7 +33,10 @@ public sealed record class Order : ModelBase, IFromRaw<Order>
             if (!this.Properties.TryGetValue("complete", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<bool?>(
+                element,
+                PublishingTest::ModelBase.SerializerOptions
+            );
         }
         set { this.Properties["complete"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -41,7 +48,10 @@ public sealed record class Order : ModelBase, IFromRaw<Order>
             if (!this.Properties.TryGetValue("petId", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<long?>(
+                element,
+                PublishingTest::ModelBase.SerializerOptions
+            );
         }
         set { this.Properties["petId"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -53,7 +63,10 @@ public sealed record class Order : ModelBase, IFromRaw<Order>
             if (!this.Properties.TryGetValue("quantity", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<int?>(
+                element,
+                PublishingTest::ModelBase.SerializerOptions
+            );
         }
         set { this.Properties["quantity"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -65,7 +78,10 @@ public sealed record class Order : ModelBase, IFromRaw<Order>
             if (!this.Properties.TryGetValue("shipDate", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTime?>(
+                element,
+                PublishingTest::ModelBase.SerializerOptions
+            );
         }
         set { this.Properties["shipDate"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -82,7 +98,7 @@ public sealed record class Order : ModelBase, IFromRaw<Order>
 
             return JsonSerializer.Deserialize<OrderProperties::Status?>(
                 element,
-                ModelBase.SerializerOptions
+                PublishingTest::ModelBase.SerializerOptions
             );
         }
         set { this.Properties["status"] = JsonSerializer.SerializeToElement(value); }

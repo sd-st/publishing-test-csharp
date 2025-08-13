@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Models.Pets;
 
 /// <summary>
 /// uploads an image
 /// </summary>
-public sealed record class PetUploadImageParams : ParamsBase
+public sealed record class PetUploadImageParams : PublishingTest::ParamsBase
 {
     public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
 
@@ -25,7 +26,10 @@ public sealed record class PetUploadImageParams : ParamsBase
             if (!this.QueryProperties.TryGetValue("additionalMetadata", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(
+                element,
+                PublishingTest::ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -40,12 +44,15 @@ public sealed record class PetUploadImageParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("image", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<string?>(
+                element,
+                PublishingTest::ModelBase.SerializerOptions
+            );
         }
         set { this.BodyProperties["image"] = JsonSerializer.SerializeToElement(value); }
     }
 
-    public override Uri Url(IPublishingTestClient client)
+    public override Uri Url(PublishingTest::IPublishingTestClient client)
     {
         return new UriBuilder(
             client.BaseUrl.ToString().TrimEnd('/')
@@ -65,12 +72,15 @@ public sealed record class PetUploadImageParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IPublishingTestClient client)
+    public void AddHeadersToRequest(
+        HttpRequestMessage request,
+        PublishingTest::IPublishingTestClient client
+    )
     {
-        ParamsBase.AddDefaultHeaders(request, client);
+        PublishingTest::ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)
         {
-            ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
+            PublishingTest::ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
     }
 }
