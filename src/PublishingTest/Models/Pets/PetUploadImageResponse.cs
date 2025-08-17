@@ -2,14 +2,11 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Models.Pets;
 
-[JsonConverter(typeof(PublishingTest::ModelConverter<PetUploadImageResponse>))]
-public sealed record class PetUploadImageResponse
-    : PublishingTest::ModelBase,
-        PublishingTest::IFromRaw<PetUploadImageResponse>
+[JsonConverter(typeof(ModelConverter<PetUploadImageResponse>))]
+public sealed record class PetUploadImageResponse : ModelBase, IFromRaw<PetUploadImageResponse>
 {
     public int? Code
     {
@@ -18,10 +15,7 @@ public sealed record class PetUploadImageResponse
             if (!this.Properties.TryGetValue("code", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<int?>(
-                element,
-                PublishingTest::ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
         set { this.Properties["code"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -33,10 +27,7 @@ public sealed record class PetUploadImageResponse
             if (!this.Properties.TryGetValue("message", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(
-                element,
-                PublishingTest::ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         set { this.Properties["message"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -48,10 +39,7 @@ public sealed record class PetUploadImageResponse
             if (!this.Properties.TryGetValue("type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(
-                element,
-                PublishingTest::ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         set { this.Properties["type"] = JsonSerializer.SerializeToElement(value); }
     }

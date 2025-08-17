@@ -1,17 +1,16 @@
 using System;
 using System.Net.Http;
-using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Models.Pets;
 
 /// <summary>
 /// Returns a single pet
 /// </summary>
-public sealed record class PetRetrieveParams : PublishingTest::ParamsBase
+public sealed record class PetRetrieveParams : ParamsBase
 {
     public required long PetID;
 
-    public override Uri Url(PublishingTest::IPublishingTestClient client)
+    public override Uri Url(IPublishingTestClient client)
     {
         return new UriBuilder(
             client.BaseUrl.ToString().TrimEnd('/') + string.Format("/pet/{0}", this.PetID)
@@ -21,15 +20,12 @@ public sealed record class PetRetrieveParams : PublishingTest::ParamsBase
         }.Uri;
     }
 
-    public void AddHeadersToRequest(
-        HttpRequestMessage request,
-        PublishingTest::IPublishingTestClient client
-    )
+    public void AddHeadersToRequest(HttpRequestMessage request, IPublishingTestClient client)
     {
-        PublishingTest::ParamsBase.AddDefaultHeaders(request, client);
+        ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)
         {
-            PublishingTest::ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
+            ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
     }
 }

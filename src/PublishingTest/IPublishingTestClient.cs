@@ -1,22 +1,22 @@
 using System;
-using Http = System.Net.Http;
-using Pets = PublishingTest.Services.Pets;
-using Stores = PublishingTest.Services.Stores;
-using Users = PublishingTest.Services.Users;
+using System.Net.Http;
+using PublishingTest.Services.Pets;
+using PublishingTest.Services.Stores;
+using PublishingTest.Services.Users;
 
 namespace PublishingTest;
 
 public interface IPublishingTestClient
 {
-    Http::HttpClient HttpClient { get; init; }
+    HttpClient HttpClient { get; init; }
 
     Uri BaseUrl { get; init; }
 
     string APIKey { get; init; }
 
-    Pets::IPetService Pets { get; }
+    IPetService Pets { get; }
 
-    Stores::IStoreService Stores { get; }
+    IStoreService Stores { get; }
 
-    Users::IUserService Users { get; }
+    IUserService Users { get; }
 }

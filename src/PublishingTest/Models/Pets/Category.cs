@@ -2,12 +2,11 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Models.Pets;
 
-[JsonConverter(typeof(PublishingTest::ModelConverter<Category>))]
-public sealed record class Category : PublishingTest::ModelBase, PublishingTest::IFromRaw<Category>
+[JsonConverter(typeof(ModelConverter<Category>))]
+public sealed record class Category : ModelBase, IFromRaw<Category>
 {
     public long? ID
     {
@@ -16,10 +15,7 @@ public sealed record class Category : PublishingTest::ModelBase, PublishingTest:
             if (!this.Properties.TryGetValue("id", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<long?>(
-                element,
-                PublishingTest::ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
         }
         set { this.Properties["id"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -31,10 +27,7 @@ public sealed record class Category : PublishingTest::ModelBase, PublishingTest:
             if (!this.Properties.TryGetValue("name", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<string?>(
-                element,
-                PublishingTest::ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         set { this.Properties["name"] = JsonSerializer.SerializeToElement(value); }
     }

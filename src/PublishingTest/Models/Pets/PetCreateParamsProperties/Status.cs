@@ -1,14 +1,13 @@
 using System;
 using System.Text.Json.Serialization;
-using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Models.Pets.PetCreateParamsProperties;
 
 /// <summary>
 /// pet status in the store
 /// </summary>
-[JsonConverter(typeof(PublishingTest::EnumConverter<Status, string>))]
-public sealed record class Status(string value) : PublishingTest::IEnum<Status, string>
+[JsonConverter(typeof(EnumConverter<Status, string>))]
+public sealed record class Status(string value) : IEnum<Status, string>
 {
     public static readonly Status Available = new("available");
 

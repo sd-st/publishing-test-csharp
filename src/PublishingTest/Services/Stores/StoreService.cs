@@ -4,23 +4,22 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using PublishingTest.Models.Stores;
-using Orders = PublishingTest.Services.Stores.Orders;
-using PublishingTest = PublishingTest;
+using PublishingTest.Services.Stores.Orders;
 
 namespace PublishingTest.Services.Stores;
 
 public sealed class StoreService : IStoreService
 {
-    readonly PublishingTest::IPublishingTestClient _client;
+    readonly IPublishingTestClient _client;
 
-    public StoreService(PublishingTest::IPublishingTestClient client)
+    public StoreService(IPublishingTestClient client)
     {
         _client = client;
-        _orders = new(() => new Orders::OrderService(client));
+        _orders = new(() => new OrderService(client));
     }
 
-    readonly Lazy<Orders::IOrderService> _orders;
-    public Orders::IOrderService Orders
+    readonly Lazy<IOrderService> _orders;
+    public IOrderService Orders
     {
         get { return _orders.Value; }
     }
@@ -34,7 +33,7 @@ public sealed class StoreService : IStoreService
             .ConfigureAwait(false);
         if (!response.IsSuccessStatusCode)
         {
-            throw new PublishingTest::HttpException(
+            throw new HttpException(
                 response.StatusCode,
                 await response.Content.ReadAsStringAsync().ConfigureAwait(false)
             );
@@ -42,7 +41,7 @@ public sealed class StoreService : IStoreService
 
         return JsonSerializer.Deserialize<Dictionary<string, int>>(
                 await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                PublishingTest::ModelBase.SerializerOptions
+                ModelBase.SerializerOptions
             ) ?? throw new NullReferenceException();
     }
 }

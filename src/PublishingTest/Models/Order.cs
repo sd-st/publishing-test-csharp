@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using OrderProperties = PublishingTest.Models.OrderProperties;
-using PublishingTest = PublishingTest;
+using PublishingTest.Models.OrderProperties;
 
 namespace PublishingTest.Models;
 
-[JsonConverter(typeof(PublishingTest::ModelConverter<Order>))]
-public sealed record class Order : PublishingTest::ModelBase, PublishingTest::IFromRaw<Order>
+[JsonConverter(typeof(ModelConverter<Order>))]
+public sealed record class Order : ModelBase, IFromRaw<Order>
 {
     public long? ID
     {
@@ -18,10 +17,7 @@ public sealed record class Order : PublishingTest::ModelBase, PublishingTest::IF
             if (!this.Properties.TryGetValue("id", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<long?>(
-                element,
-                PublishingTest::ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
         }
         set { this.Properties["id"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -33,10 +29,7 @@ public sealed record class Order : PublishingTest::ModelBase, PublishingTest::IF
             if (!this.Properties.TryGetValue("complete", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<bool?>(
-                element,
-                PublishingTest::ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
         set { this.Properties["complete"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -48,10 +41,7 @@ public sealed record class Order : PublishingTest::ModelBase, PublishingTest::IF
             if (!this.Properties.TryGetValue("petId", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<long?>(
-                element,
-                PublishingTest::ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
         }
         set { this.Properties["petId"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -63,10 +53,7 @@ public sealed record class Order : PublishingTest::ModelBase, PublishingTest::IF
             if (!this.Properties.TryGetValue("quantity", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<int?>(
-                element,
-                PublishingTest::ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
         set { this.Properties["quantity"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -78,10 +65,7 @@ public sealed record class Order : PublishingTest::ModelBase, PublishingTest::IF
             if (!this.Properties.TryGetValue("shipDate", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(
-                element,
-                PublishingTest::ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
         }
         set { this.Properties["shipDate"] = JsonSerializer.SerializeToElement(value); }
     }
@@ -89,17 +73,14 @@ public sealed record class Order : PublishingTest::ModelBase, PublishingTest::IF
     /// <summary>
     /// Order Status
     /// </summary>
-    public OrderProperties::Status? Status
+    public Status? Status
     {
         get
         {
             if (!this.Properties.TryGetValue("status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<OrderProperties::Status?>(
-                element,
-                PublishingTest::ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<Status?>(element, ModelBase.SerializerOptions);
         }
         set { this.Properties["status"] = JsonSerializer.SerializeToElement(value); }
     }

@@ -1,15 +1,14 @@
 using System;
 using System.Net.Http;
-using PublishingTest = PublishingTest;
 
 namespace PublishingTest.Models.Users;
 
 /// <summary>
 /// Logs out current logged in user session
 /// </summary>
-public sealed record class UserLogoutParams : PublishingTest::ParamsBase
+public sealed record class UserLogoutParams : ParamsBase
 {
-    public override Uri Url(PublishingTest::IPublishingTestClient client)
+    public override Uri Url(IPublishingTestClient client)
     {
         return new UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/user/logout")
         {
@@ -17,15 +16,12 @@ public sealed record class UserLogoutParams : PublishingTest::ParamsBase
         }.Uri;
     }
 
-    public void AddHeadersToRequest(
-        HttpRequestMessage request,
-        PublishingTest::IPublishingTestClient client
-    )
+    public void AddHeadersToRequest(HttpRequestMessage request, IPublishingTestClient client)
     {
-        PublishingTest::ParamsBase.AddDefaultHeaders(request, client);
+        ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)
         {
-            PublishingTest::ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
+            ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
     }
 }
