@@ -13,16 +13,25 @@ public sealed record class PetFindByStatusParams : ParamsBase
     /// <summary>
     /// Status values that need to be considered for filter
     /// </summary>
-    public Status? Status
+    public ApiEnum<string, Status>? Status
     {
         get
         {
             if (!this.QueryProperties.TryGetValue("status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Status?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<ApiEnum<string, Status>?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
-        set { this.QueryProperties["status"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.QueryProperties["status"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public override Uri Url(IPublishingTestClient client)

@@ -23,7 +23,13 @@ public sealed record class PetFindByTagsParams : ParamsBase
 
             return JsonSerializer.Deserialize<List<string>?>(element, ModelBase.SerializerOptions);
         }
-        set { this.QueryProperties["tags"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.QueryProperties["tags"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public override Uri Url(IPublishingTestClient client)

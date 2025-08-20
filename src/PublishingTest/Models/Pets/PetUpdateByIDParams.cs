@@ -23,7 +23,13 @@ public sealed record class PetUpdateByIDParams : ParamsBase
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.QueryProperties["name"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.QueryProperties["name"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     /// <summary>
@@ -38,7 +44,13 @@ public sealed record class PetUpdateByIDParams : ParamsBase
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.QueryProperties["status"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.QueryProperties["status"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public override Uri Url(IPublishingTestClient client)

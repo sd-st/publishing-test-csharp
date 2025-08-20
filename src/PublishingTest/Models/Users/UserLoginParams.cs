@@ -21,7 +21,13 @@ public sealed record class UserLoginParams : ParamsBase
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.QueryProperties["password"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.QueryProperties["password"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     /// <summary>
@@ -36,7 +42,13 @@ public sealed record class UserLoginParams : ParamsBase
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.QueryProperties["username"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.QueryProperties["username"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public override Uri Url(IPublishingTestClient client)

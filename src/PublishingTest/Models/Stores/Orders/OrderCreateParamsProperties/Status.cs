@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PublishingTest.Models.Stores.Orders.OrderCreateParamsProperties;
@@ -6,45 +7,43 @@ namespace PublishingTest.Models.Stores.Orders.OrderCreateParamsProperties;
 /// <summary>
 /// Order Status
 /// </summary>
-[JsonConverter(typeof(EnumConverter<Status, string>))]
-public sealed record class Status(string value) : IEnum<Status, string>
+[JsonConverter(typeof(StatusConverter))]
+public enum Status
 {
-    public static readonly Status Placed = new("placed");
+    Placed,
+    Approved,
+    Delivered,
+}
 
-    public static readonly Status Approved = new("approved");
-
-    public static readonly Status Delivered = new("delivered");
-
-    readonly string _value = value;
-
-    public enum Value
+sealed class StatusConverter : JsonConverter<Status>
+{
+    public override Status Read(
+        ref Utf8JsonReader reader,
+        Type _typeToConvert,
+        JsonSerializerOptions options
+    )
     {
-        Placed,
-        Approved,
-        Delivered,
-    }
-
-    public Value Known() =>
-        _value switch
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "placed" => Value.Placed,
-            "approved" => Value.Approved,
-            "delivered" => Value.Delivered,
-            _ => throw new ArgumentOutOfRangeException(nameof(_value)),
+            "placed" => Status.Placed,
+            "approved" => Status.Approved,
+            "delivered" => Status.Delivered,
+            _ => (Status)(-1),
         };
-
-    public string Raw()
-    {
-        return _value;
     }
 
-    public void Validate()
+    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
     {
-        Known();
-    }
-
-    public static Status FromRaw(string value)
-    {
-        return new(value);
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Status.Placed => "placed",
+                Status.Approved => "approved",
+                Status.Delivered => "delivered",
+                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+            },
+            options
+        );
     }
 }

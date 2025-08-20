@@ -20,7 +20,13 @@ public sealed record class Pet : ModelBase, IFromRaw<Pet>
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new ArgumentNullException("name");
         }
-        set { this.Properties["name"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["name"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public required List<string> PhotoURLs
@@ -33,7 +39,13 @@ public sealed record class Pet : ModelBase, IFromRaw<Pet>
             return JsonSerializer.Deserialize<List<string>>(element, ModelBase.SerializerOptions)
                 ?? throw new ArgumentNullException("photoUrls");
         }
-        set { this.Properties["photoUrls"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["photoUrls"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public long? ID
@@ -45,7 +57,13 @@ public sealed record class Pet : ModelBase, IFromRaw<Pet>
 
             return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
         }
-        set { this.Properties["id"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["id"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public Category? Category
@@ -57,22 +75,37 @@ public sealed record class Pet : ModelBase, IFromRaw<Pet>
 
             return JsonSerializer.Deserialize<Category?>(element, ModelBase.SerializerOptions);
         }
-        set { this.Properties["category"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["category"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     /// <summary>
     /// pet status in the store
     /// </summary>
-    public Status? Status
+    public ApiEnum<string, Status>? Status
     {
         get
         {
             if (!this.Properties.TryGetValue("status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Status?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<ApiEnum<string, Status>?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
-        set { this.Properties["status"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["status"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public List<Tag>? Tags
@@ -84,7 +117,13 @@ public sealed record class Pet : ModelBase, IFromRaw<Pet>
 
             return JsonSerializer.Deserialize<List<Tag>?>(element, ModelBase.SerializerOptions);
         }
-        set { this.Properties["tags"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["tags"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public override void Validate()

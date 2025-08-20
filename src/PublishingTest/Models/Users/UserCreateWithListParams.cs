@@ -22,7 +22,13 @@ public sealed record class UserCreateWithListParams : ParamsBase
 
             return JsonSerializer.Deserialize<List<User>?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["items"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["items"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public override Uri Url(IPublishingTestClient client)

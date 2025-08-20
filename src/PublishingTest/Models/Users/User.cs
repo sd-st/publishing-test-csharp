@@ -17,7 +17,13 @@ public sealed record class User : ModelBase, IFromRaw<User>
 
             return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
         }
-        set { this.Properties["id"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["id"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public string? Email
@@ -29,7 +35,13 @@ public sealed record class User : ModelBase, IFromRaw<User>
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.Properties["email"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["email"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public string? FirstName
@@ -41,7 +53,13 @@ public sealed record class User : ModelBase, IFromRaw<User>
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.Properties["firstName"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["firstName"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public string? LastName
@@ -53,7 +71,13 @@ public sealed record class User : ModelBase, IFromRaw<User>
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.Properties["lastName"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["lastName"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public string? Password
@@ -65,7 +89,13 @@ public sealed record class User : ModelBase, IFromRaw<User>
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.Properties["password"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["password"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public string? Phone
@@ -77,7 +107,13 @@ public sealed record class User : ModelBase, IFromRaw<User>
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.Properties["phone"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["phone"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public string? Username
@@ -89,7 +125,13 @@ public sealed record class User : ModelBase, IFromRaw<User>
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.Properties["username"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["username"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     /// <summary>
@@ -104,7 +146,13 @@ public sealed record class User : ModelBase, IFromRaw<User>
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set { this.Properties["userStatus"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["userStatus"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public override void Validate()

@@ -17,7 +17,13 @@ public sealed record class PetUploadImageResponse : ModelBase, IFromRaw<PetUploa
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set { this.Properties["code"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["code"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public string? Message
@@ -29,7 +35,13 @@ public sealed record class PetUploadImageResponse : ModelBase, IFromRaw<PetUploa
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.Properties["message"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["message"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public string? Type
@@ -41,7 +53,13 @@ public sealed record class PetUploadImageResponse : ModelBase, IFromRaw<PetUploa
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.Properties["type"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.Properties["type"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public override void Validate()

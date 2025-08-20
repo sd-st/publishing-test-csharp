@@ -24,7 +24,13 @@ public sealed record class PetCreateParams : ParamsBase
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new ArgumentNullException("name");
         }
-        set { this.BodyProperties["name"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["name"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public required List<string> PhotoURLs
@@ -37,7 +43,13 @@ public sealed record class PetCreateParams : ParamsBase
             return JsonSerializer.Deserialize<List<string>>(element, ModelBase.SerializerOptions)
                 ?? throw new ArgumentNullException("photoUrls");
         }
-        set { this.BodyProperties["photoUrls"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["photoUrls"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public long? ID
@@ -49,7 +61,13 @@ public sealed record class PetCreateParams : ParamsBase
 
             return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["id"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["id"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public Category? Category
@@ -61,22 +79,37 @@ public sealed record class PetCreateParams : ParamsBase
 
             return JsonSerializer.Deserialize<Category?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["category"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["category"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     /// <summary>
     /// pet status in the store
     /// </summary>
-    public Status? Status
+    public ApiEnum<string, Status>? Status
     {
         get
         {
             if (!this.BodyProperties.TryGetValue("status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Status?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<ApiEnum<string, Status>?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
-        set { this.BodyProperties["status"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["status"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public List<Tag>? Tags
@@ -88,7 +121,13 @@ public sealed record class PetCreateParams : ParamsBase
 
             return JsonSerializer.Deserialize<List<Tag>?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["tags"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["tags"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public override Uri Url(IPublishingTestClient client)

@@ -23,7 +23,13 @@ public sealed record class OrderCreateParams : ParamsBase
 
             return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["id"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["id"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public bool? Complete
@@ -35,7 +41,13 @@ public sealed record class OrderCreateParams : ParamsBase
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["complete"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["complete"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public long? PetID
@@ -47,7 +59,13 @@ public sealed record class OrderCreateParams : ParamsBase
 
             return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["petId"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["petId"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public int? Quantity
@@ -59,7 +77,13 @@ public sealed record class OrderCreateParams : ParamsBase
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["quantity"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["quantity"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public DateTime? ShipDate
@@ -71,22 +95,37 @@ public sealed record class OrderCreateParams : ParamsBase
 
             return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["shipDate"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["shipDate"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     /// <summary>
     /// Order Status
     /// </summary>
-    public Status? Status
+    public ApiEnum<string, Status>? Status
     {
         get
         {
             if (!this.BodyProperties.TryGetValue("status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Status?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<ApiEnum<string, Status>?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
-        set { this.BodyProperties["status"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["status"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public override Uri Url(IPublishingTestClient client)

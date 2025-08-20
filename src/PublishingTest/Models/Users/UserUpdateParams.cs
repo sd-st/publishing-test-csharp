@@ -24,7 +24,13 @@ public sealed record class UserUpdateParams : ParamsBase
 
             return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["id"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["id"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public string? Email
@@ -36,7 +42,13 @@ public sealed record class UserUpdateParams : ParamsBase
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["email"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["email"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public string? FirstName
@@ -48,7 +60,13 @@ public sealed record class UserUpdateParams : ParamsBase
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["firstName"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["firstName"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public string? LastName
@@ -60,7 +78,13 @@ public sealed record class UserUpdateParams : ParamsBase
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["lastName"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["lastName"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public string? Password
@@ -72,7 +96,13 @@ public sealed record class UserUpdateParams : ParamsBase
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["password"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["password"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public string? Phone
@@ -84,7 +114,13 @@ public sealed record class UserUpdateParams : ParamsBase
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["phone"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["phone"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public string? Username
@@ -96,7 +132,13 @@ public sealed record class UserUpdateParams : ParamsBase
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["username"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["username"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     /// <summary>
@@ -111,7 +153,13 @@ public sealed record class UserUpdateParams : ParamsBase
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["userStatus"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["userStatus"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public override Uri Url(IPublishingTestClient client)

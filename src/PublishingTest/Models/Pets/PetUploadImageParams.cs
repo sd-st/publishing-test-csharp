@@ -29,7 +29,10 @@ public sealed record class PetUploadImageParams : ParamsBase
         }
         set
         {
-            this.QueryProperties["additionalMetadata"] = JsonSerializer.SerializeToElement(value);
+            this.QueryProperties["additionalMetadata"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
         }
     }
 
@@ -42,7 +45,13 @@ public sealed record class PetUploadImageParams : ParamsBase
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set { this.BodyProperties["image"] = JsonSerializer.SerializeToElement(value); }
+        set
+        {
+            this.BodyProperties["image"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public override Uri Url(IPublishingTestClient client)
