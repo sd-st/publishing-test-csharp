@@ -31,14 +31,11 @@ See the [`examples`](examples) directory for complete and runnable examples.
 ```csharp
 using System;
 using PublishingTest;
-using PublishingTest.Models.Stores.Orders;
 
 // Configured using the PETSTORE_API_KEY and PUBLISHING_TEST_BASE_URL environment variables
 PublishingTestClient client = new();
 
-OrderCreateParams parameters = new();
-
-var order = await client.Stores.Orders.Create(parameters);
+var order = await client.Stores.Orders.Create();
 
 Console.WriteLine(order);
 ```

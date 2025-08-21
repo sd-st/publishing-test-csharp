@@ -15,8 +15,10 @@ public sealed class UserService : IUserService
         _client = client;
     }
 
-    public async Task<User> Create(UserCreateParams parameters)
+    public async Task<User> Create(UserCreateParams? parameters = null)
     {
+        parameters ??= new();
+
         using HttpRequestMessage request = new(HttpMethod.Post, parameters.Url(this._client))
         {
             Content = parameters.BodyContent(),
@@ -95,8 +97,10 @@ public sealed class UserService : IUserService
         }
     }
 
-    public async Task<User> CreateWithList(UserCreateWithListParams parameters)
+    public async Task<User> CreateWithList(UserCreateWithListParams? parameters = null)
     {
+        parameters ??= new();
+
         using HttpRequestMessage request = new(HttpMethod.Post, parameters.Url(this._client))
         {
             Content = parameters.BodyContent(),
@@ -119,8 +123,10 @@ public sealed class UserService : IUserService
             ) ?? throw new NullReferenceException();
     }
 
-    public async Task<string> Login(UserLoginParams parameters)
+    public async Task<string> Login(UserLoginParams? parameters = null)
     {
+        parameters ??= new();
+
         using HttpRequestMessage request = new(HttpMethod.Get, parameters.Url(this._client));
         parameters.AddHeadersToRequest(request, this._client);
         using HttpResponseMessage response = await this
@@ -140,8 +146,10 @@ public sealed class UserService : IUserService
             ) ?? throw new NullReferenceException();
     }
 
-    public async Task Logout(UserLogoutParams parameters)
+    public async Task Logout(UserLogoutParams? parameters = null)
     {
+        parameters ??= new();
+
         using HttpRequestMessage request = new(HttpMethod.Get, parameters.Url(this._client));
         parameters.AddHeadersToRequest(request, this._client);
         using HttpResponseMessage response = await this

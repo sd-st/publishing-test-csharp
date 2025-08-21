@@ -7,7 +7,7 @@ public class OrderServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task Create_Works()
     {
-        var order = await this.client.Stores.Orders.Create(new());
+        var order = await this.client.Stores.Orders.Create();
         order.Validate();
     }
 

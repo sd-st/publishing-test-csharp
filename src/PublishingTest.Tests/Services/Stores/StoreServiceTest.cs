@@ -7,7 +7,7 @@ public class StoreServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task ListInventory_Works()
     {
-        var response = await this.client.Stores.ListInventory(new());
+        var response = await this.client.Stores.ListInventory();
         foreach (var item in response.Values)
         {
             _ = item;

@@ -7,7 +7,7 @@ public class UserServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task Create_Works()
     {
-        var user = await this.client.Users.Create(new());
+        var user = await this.client.Users.Create();
         user.Validate();
     }
 
@@ -33,20 +33,20 @@ public class UserServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task CreateWithList_Works()
     {
-        var user = await this.client.Users.CreateWithList(new());
+        var user = await this.client.Users.CreateWithList();
         user.Validate();
     }
 
     [Fact(Skip = "Prism tests are disabled")]
     public async Task Login_Works()
     {
-        var response = await this.client.Users.Login(new());
+        var response = await this.client.Users.Login();
         _ = response;
     }
 
     [Fact(Skip = "Prism tests are disabled")]
     public async Task Logout_Works()
     {
-        await this.client.Users.Logout(new());
+        await this.client.Users.Logout();
     }
 }

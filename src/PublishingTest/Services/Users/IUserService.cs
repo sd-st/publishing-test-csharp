@@ -8,7 +8,7 @@ public interface IUserService
     /// <summary>
     /// This can only be done by the logged in user.
     /// </summary>
-    Task<User> Create(UserCreateParams parameters);
+    Task<User> Create(UserCreateParams? parameters = null);
 
     /// <summary>
     /// Get user by user name
@@ -28,15 +28,15 @@ public interface IUserService
     /// <summary>
     /// Creates list of users with given input array
     /// </summary>
-    Task<User> CreateWithList(UserCreateWithListParams parameters);
+    Task<User> CreateWithList(UserCreateWithListParams? parameters = null);
 
     /// <summary>
     /// Logs user into the system
     /// </summary>
-    Task<string> Login(UserLoginParams parameters);
+    Task<string> Login(UserLoginParams? parameters = null);
 
     /// <summary>
     /// Logs out current logged in user session
     /// </summary>
-    Task Logout(UserLogoutParams parameters);
+    Task Logout(UserLogoutParams? parameters = null);
 }

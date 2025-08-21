@@ -12,5 +12,5 @@ public interface IStoreService
     /// <summary>
     /// Returns a map of status codes to quantities
     /// </summary>
-    Task<Dictionary<string, int>> ListInventory(StoreListInventoryParams parameters);
+    Task<Dictionary<string, int>> ListInventory(StoreListInventoryParams? parameters = null);
 }

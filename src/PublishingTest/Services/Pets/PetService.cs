@@ -101,8 +101,10 @@ public sealed class PetService : IPetService
         }
     }
 
-    public async Task<List<Pet>> FindByStatus(PetFindByStatusParams parameters)
+    public async Task<List<Pet>> FindByStatus(PetFindByStatusParams? parameters = null)
     {
+        parameters ??= new();
+
         using HttpRequestMessage request = new(HttpMethod.Get, parameters.Url(this._client));
         parameters.AddHeadersToRequest(request, this._client);
         using HttpResponseMessage response = await this
@@ -122,8 +124,10 @@ public sealed class PetService : IPetService
             ) ?? throw new NullReferenceException();
     }
 
-    public async Task<List<Pet>> FindByTags(PetFindByTagsParams parameters)
+    public async Task<List<Pet>> FindByTags(PetFindByTagsParams? parameters = null)
     {
+        parameters ??= new();
+
         using HttpRequestMessage request = new(HttpMethod.Get, parameters.Url(this._client));
         parameters.AddHeadersToRequest(request, this._client);
         using HttpResponseMessage response = await this

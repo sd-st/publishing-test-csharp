@@ -34,7 +34,7 @@ public class PetServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task FindByStatus_Works()
     {
-        var pets = await this.client.Pets.FindByStatus(new());
+        var pets = await this.client.Pets.FindByStatus();
         foreach (var item in pets)
         {
             item.Validate();
@@ -44,7 +44,7 @@ public class PetServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task FindByTags_Works()
     {
-        var pets = await this.client.Pets.FindByTags(new());
+        var pets = await this.client.Pets.FindByTags();
         foreach (var item in pets)
         {
             item.Validate();

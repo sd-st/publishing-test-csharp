@@ -24,8 +24,12 @@ public sealed class StoreService : IStoreService
         get { return _orders.Value; }
     }
 
-    public async Task<Dictionary<string, int>> ListInventory(StoreListInventoryParams parameters)
+    public async Task<Dictionary<string, int>> ListInventory(
+        StoreListInventoryParams? parameters = null
+    )
     {
+        parameters ??= new();
+
         using HttpRequestMessage request = new(HttpMethod.Get, parameters.Url(this._client));
         parameters.AddHeadersToRequest(request, this._client);
         using HttpResponseMessage response = await this

@@ -29,13 +29,13 @@ public interface IPetService
     /// <summary>
     /// Multiple status values can be provided with comma separated strings
     /// </summary>
-    Task<List<Pet>> FindByStatus(PetFindByStatusParams parameters);
+    Task<List<Pet>> FindByStatus(PetFindByStatusParams? parameters = null);
 
     /// <summary>
     /// Multiple tags can be provided with comma separated strings. Use tag1, tag2,
     /// tag3 for testing.
     /// </summary>
-    Task<List<Pet>> FindByTags(PetFindByTagsParams parameters);
+    Task<List<Pet>> FindByTags(PetFindByTagsParams? parameters = null);
 
     /// <summary>
     /// Updates a pet in the store with form data

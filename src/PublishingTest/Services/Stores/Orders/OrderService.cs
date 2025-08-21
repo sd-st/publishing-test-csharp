@@ -16,8 +16,10 @@ public sealed class OrderService : IOrderService
         _client = client;
     }
 
-    public async Task<Order> Create(OrderCreateParams parameters)
+    public async Task<Order> Create(OrderCreateParams? parameters = null)
     {
+        parameters ??= new();
+
         using HttpRequestMessage request = new(HttpMethod.Post, parameters.Url(this._client))
         {
             Content = parameters.BodyContent(),

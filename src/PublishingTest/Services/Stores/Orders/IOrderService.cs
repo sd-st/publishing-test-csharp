@@ -9,7 +9,7 @@ public interface IOrderService
     /// <summary>
     /// Place a new order in the store
     /// </summary>
-    Task<Order> Create(OrderCreateParams parameters);
+    Task<Order> Create(OrderCreateParams? parameters = null);
 
     /// <summary>
     /// For valid response try integer IDs with value <= 5 or > 10. Other values
