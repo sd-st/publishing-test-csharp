@@ -60,7 +60,7 @@ public class PetServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task UploadImage_Works()
     {
-        var response = await this.client.Pets.UploadImage(new() { PetID = 0 });
+        var response = await this.client.Pets.UploadImage(new() { PetID = 0, Image = "a value" });
         response.Validate();
     }
 }

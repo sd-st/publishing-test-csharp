@@ -15,6 +15,25 @@ public sealed record class PetUploadImageParams : ParamsBase
 
     public required long PetID;
 
+    public required string Image
+    {
+        get
+        {
+            if (!this.BodyProperties.TryGetValue("image", out JsonElement element))
+                throw new ArgumentOutOfRangeException("image", "Missing required argument");
+
+            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
+                ?? throw new ArgumentNullException("image");
+        }
+        set
+        {
+            this.BodyProperties["image"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
     /// <summary>
     /// Additional Metadata
     /// </summary>
@@ -30,24 +49,6 @@ public sealed record class PetUploadImageParams : ParamsBase
         set
         {
             this.QueryProperties["additionalMetadata"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
-    }
-
-    public string? Image
-    {
-        get
-        {
-            if (!this.BodyProperties.TryGetValue("image", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        set
-        {
-            this.BodyProperties["image"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
