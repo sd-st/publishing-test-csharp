@@ -152,6 +152,9 @@ public abstract record class ParamsBase
         IPublishingTestClient client
     )
     {
-        request.Headers.Add("api_key", client.APIKey);
+        if (client.APIKey != null)
+        {
+            request.Headers.Add("api_key", client.APIKey);
+        }
     }
 }
