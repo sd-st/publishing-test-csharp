@@ -1,4 +1,4 @@
-namespace PublishingTest;
+namespace PublishingTest.Core;
 
 interface IVariant<TVariant, TValue>
     where TVariant : IVariant<TVariant, TValue>

@@ -7,7 +7,7 @@ using PetFindByStatusParamsProperties = PublishingTest.Models.Pets.PetFindByStat
 using PetProperties = PublishingTest.Models.Pets.PetProperties;
 using PetUpdateParamsProperties = PublishingTest.Models.Pets.PetUpdateParamsProperties;
 
-namespace PublishingTest;
+namespace PublishingTest.Core;
 
 public abstract record class ModelBase
 {

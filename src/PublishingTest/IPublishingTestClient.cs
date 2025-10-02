@@ -1,5 +1,7 @@
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
+using PublishingTest.Core;
 using PublishingTest.Services.Pets;
 using PublishingTest.Services.Stores;
 using PublishingTest.Services.Users;
@@ -19,4 +21,7 @@ public interface IPublishingTestClient
     IStoreService Stores { get; }
 
     IUserService Users { get; }
+
+    Task<HttpResponse> Execute<T>(HttpRequest<T> request)
+        where T : ParamsBase;
 }

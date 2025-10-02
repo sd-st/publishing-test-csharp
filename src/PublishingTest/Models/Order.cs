@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using PublishingTest.Core;
 using PublishingTest.Models.OrderProperties;
 
 namespace PublishingTest.Models;

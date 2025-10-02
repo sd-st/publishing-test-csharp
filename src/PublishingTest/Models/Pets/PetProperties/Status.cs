@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using PublishingTest.Exceptions;
 
 namespace PublishingTest.Models.Pets.PetProperties;
 
@@ -41,7 +42,9 @@ sealed class StatusConverter : JsonConverter<Status>
                 Status.Available => "available",
                 Status.Pending => "pending",
                 Status.Sold => "sold",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new PublishingTestInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

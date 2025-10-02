@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using PublishingTest.Core;
+using PublishingTest.Exceptions;
 using PublishingTest.Models.Pets.PetUpdateParamsProperties;
 
 namespace PublishingTest.Models.Pets;
@@ -19,10 +21,16 @@ public sealed record class PetUpdateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("name", out JsonElement element))
-                throw new ArgumentOutOfRangeException("name", "Missing required argument");
+                throw new PublishingTestInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentOutOfRangeException("name", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("name");
+                ?? throw new PublishingTestInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentNullException("name")
+                );
         }
         set
         {
@@ -38,10 +46,16 @@ public sealed record class PetUpdateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("photoUrls", out JsonElement element))
-                throw new ArgumentOutOfRangeException("photoUrls", "Missing required argument");
+                throw new PublishingTestInvalidDataException(
+                    "'photoUrls' cannot be null",
+                    new ArgumentOutOfRangeException("photoUrls", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<List<string>>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("photoUrls");
+                ?? throw new PublishingTestInvalidDataException(
+                    "'photoUrls' cannot be null",
+                    new ArgumentNullException("photoUrls")
+                );
         }
         set
         {
@@ -138,7 +152,7 @@ public sealed record class PetUpdateParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -147,7 +161,10 @@ public sealed record class PetUpdateParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IPublishingTestClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IPublishingTestClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

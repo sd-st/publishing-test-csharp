@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Text.Json;
+using PublishingTest.Core;
 
 namespace PublishingTest.Models.Users;
 
@@ -59,7 +60,10 @@ public sealed record class UserLoginParams : ParamsBase
         }.Uri;
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IPublishingTestClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IPublishingTestClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

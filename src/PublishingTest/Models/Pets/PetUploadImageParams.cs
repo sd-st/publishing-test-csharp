@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using PublishingTest.Core;
+using PublishingTest.Exceptions;
 
 namespace PublishingTest.Models.Pets;
 
@@ -20,10 +22,16 @@ public sealed record class PetUploadImageParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("image", out JsonElement element))
-                throw new ArgumentOutOfRangeException("image", "Missing required argument");
+                throw new PublishingTestInvalidDataException(
+                    "'image' cannot be null",
+                    new ArgumentOutOfRangeException("image", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("image");
+                ?? throw new PublishingTestInvalidDataException(
+                    "'image' cannot be null",
+                    new ArgumentNullException("image")
+                );
         }
         set
         {
@@ -66,7 +74,7 @@ public sealed record class PetUploadImageParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -75,7 +83,10 @@ public sealed record class PetUploadImageParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IPublishingTestClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IPublishingTestClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using PublishingTest.Core;
 
 namespace PublishingTest.Models.Users;
 
@@ -168,7 +169,7 @@ public sealed record class UserCreateParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -177,7 +178,10 @@ public sealed record class UserCreateParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IPublishingTestClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IPublishingTestClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

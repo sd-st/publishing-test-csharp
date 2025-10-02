@@ -74,6 +74,33 @@ To send a request to the Publishing Test API, build an instance of some `Params`
 
 For example, `client.Stores.Orders.Create` should be called with an instance of `OrderCreateParams`, and it will return an instance of `Task<Order>`.
 
+## Error handling
+
+The SDK throws custom unchecked exception types:
+
+- `PublishingTestApiException`: Base class for API errors. See this table for which exception subclass is thrown for each HTTP status code:
+
+| Status | Exception                                     |
+| ------ | --------------------------------------------- |
+| 400    | `PublishingTestBadRequestException`           |
+| 401    | `PublishingTestUnauthorizedException`         |
+| 403    | `PublishingTestForbiddenException`            |
+| 404    | `PublishingTestNotFoundException`             |
+| 422    | `PublishingTestUnprocessableEntityException`  |
+| 429    | `PublishingTestRateLimitException`            |
+| 5xx    | `PublishingTest5xxException`                  |
+| others | `PublishingTestUnexpectedStatusCodeException` |
+
+Additionally, all 4xx errors inherit from `PublishingTest4xxException`.
+
+false
+
+- `PublishingTestIOException`: I/O networking errors.
+
+- `PublishingTestInvalidDataException`: Failure to interpret successfully parsed data. For example, when accessing a property that's supposed to be required, but the API unexpectedly omitted it from the response.
+
+- `PublishingTestException`: Base class for all exceptions.
+
 ## Semantic versioning
 
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:

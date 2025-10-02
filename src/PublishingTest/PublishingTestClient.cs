@@ -1,5 +1,8 @@
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
+using PublishingTest.Core;
+using PublishingTest.Exceptions;
 using PublishingTest.Services.Pets;
 using PublishingTest.Services.Stores;
 using PublishingTest.Services.Users;
@@ -24,7 +27,10 @@ public sealed class PublishingTestClient : IPublishingTestClient
 
     Lazy<string> _apiKey = new(() =>
         Environment.GetEnvironmentVariable("PETSTORE_API_KEY")
-        ?? throw new ArgumentNullException(nameof(APIKey))
+        ?? throw new PublishingTestInvalidDataException(
+            string.Format("{0} cannot be null", nameof(APIKey)),
+            new ArgumentNullException(nameof(APIKey))
+        )
     );
     public string APIKey
     {
@@ -48,6 +54,46 @@ public sealed class PublishingTestClient : IPublishingTestClient
     public IUserService Users
     {
         get { return _users.Value; }
+    }
+
+    public async Task<HttpResponse> Execute<T>(HttpRequest<T> request)
+        where T : ParamsBase
+    {
+        using HttpRequestMessage requestMessage = new(request.Method, request.Params.Url(this))
+        {
+            Content = request.Params.BodyContent(),
+        };
+        request.Params.AddHeadersToRequest(requestMessage, this);
+        HttpResponseMessage responseMessage;
+        try
+        {
+            responseMessage = await this
+                .HttpClient.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead)
+                .ConfigureAwait(false);
+        }
+        catch (HttpRequestException e1)
+        {
+            throw new PublishingTestIOException("I/O exception", e1);
+        }
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            try
+            {
+                throw PublishingTestExceptionFactory.CreateApiException(
+                    responseMessage.StatusCode,
+                    await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false)
+                );
+            }
+            catch (HttpRequestException e)
+            {
+                throw new PublishingTestIOException("I/O Exception", e);
+            }
+            finally
+            {
+                responseMessage.Dispose();
+            }
+        }
+        return new() { Message = responseMessage };
     }
 
     public PublishingTestClient()
